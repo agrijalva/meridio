@@ -1,0 +1,184 @@
+<div ng-init="init();">
+    <div class=container>
+    	<div class="pnl-perfil">
+    		<div class="col-sm-12">
+	    		<!-- <h1 class="pull-left">Enlaces</h1> -->
+
+	    		<!-- <button class="btn btn-success pull-right" ng-click="openNewNews();">
+	    			Agregar noticia <i class="fa fa-plus-circle"></i>
+	    		</button>
+    			
+    			<div class="pull-right" style="width: 250px; margin-right: 10px;">
+    				<input type="" name="" placeholder="Buscar" class="form-control" ng-model="search">
+    			</div> -->
+    		</div>
+
+    		<div class="col-sm-12">
+    			<div class="row">
+	    			<!-- <div class="col-sm-3">
+	    				<div class="panel pnl-square">
+	    					<div fav-panel-search></div>
+	    				</div>
+	    			</div> -->
+
+	    			<div class="col-sm-12">
+			    		<div ng-show="Noticias.success" class="panel panel-default pnl-enlaces">		
+							<div class="panel-heading">
+						    	<h3 class="panel-title">mis favoritos</h3>
+						  	</div>
+
+						  	<div fav-feed></div>
+
+						  	<div class="panel-body" ng-repeat="not in Noticias.data | filter: search | startFrom:currentPage*pageSize | limitTo:pageSize">
+								<div class="col-sm-12">
+						    		<b ng-bind-html="not.not_titulo"></b>
+						    	</div>
+						  		
+						    	<div class="col-sm-12">
+						    		<!-- <b ng-bind-html="not.not_subtitulo"></b> -->
+						    	</div>
+						    	<div class="col-sm-7" ng-bind-html="not.not_contenido">
+						    	
+						    	</div>
+							    <div class="col-sm-5">
+						    		<img src="{{not.not_imagen}}" width="100%">
+
+						    		<button class="btn pull-right btn-danger btn-cancelar" ng-click="eliminar(not.idNoticia);">Eliminar</button>
+						    		<button class="btn pull-right btn-info btn-guardar" ng-click="openEditNews(not);">Editar</button>
+							    </div>
+						  	</div>
+
+						  	
+	    				</div>
+    				</div>
+
+    				<!-- <div class="col-sm-8"> -->
+			    		<!-- <div class="panel panel-default" ng-repeat="not in Noticias.data | filter: search"> -->
+			    		<!-- <div ng-show="Noticias.success" class="panel panel-default" ng-repeat="not in Noticias.data | filter: search | startFrom:currentPage*pageSize | limitTo:pageSize"">		
+							<div class="panel-heading">
+						    	<h3 class="panel-title"><b ng-bind-html="not.not_titulo"></b></h3>
+						  	</div>
+						  	<div class="panel-body">
+						    	<div class="col-sm-12">
+						    		<h4 ng-bind-html="not.not_subtitulo"></h4>
+						    	</div>
+						    	<div class="col-sm-7" ng-bind-html="not.not_contenido">
+						    	
+						    	</div>
+							    <div class="col-sm-5">
+						    		<img src="{{not.not_imagen}}" width="100%">
+
+						    		<button class="btn pull-right btn-danger btn-cancelar" ng-click="eliminar(not.idNoticia);">Eliminar</button>
+						    		<button class="btn pull-right btn-info btn-guardar" ng-click="openEditNews(not);">Editar</button>
+							    </div>
+						  	</div>
+	    				</div>
+    				</div> -->
+				</div>
+
+	    		<div ng-show="!Noticias.success">
+	    			<center>
+	    				<br><br><br><br>
+	    				<i class="fa fa-newspaper-o" aria-hidden="true" style="font-size: 100px; color: #eee;"></i>
+	    				<p>No hay noticias agregadas</p>
+	    			</center>
+	    		</div>
+    		</div>
+
+    		<div class="col-sm-12" ng-show="Noticias.success">
+    			<div class="pull-right">
+	    			<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+				        Anterior
+				    </button>
+				    {{currentPage+1}}/{{numberOfPages()}}
+				    <button class="btn btn-default" ng-disabled="currentPage >= Noticias.data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+				        Siguiente
+				    </button>
+			    </div>
+    		</div>
+
+    		<div class="col-sm-12"> <br><br><br><br> </div>
+
+    	</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalNuevaNoticia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        	<form ng-submit="guardarNoticia();" name="frmNoticia" id="frmNoticia">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">Nueva Noticia</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<div class="row">
+		            	<div class="col-sm-12">
+		            		
+		            		<label><small>Título</small></label>
+		            		<input name="not_titulo" type="text" class="form-control" ng-model="frmNoticia.not_titulo">
+
+		            		<label><small>Sub título</small></label>
+		            		<input name="not_subtitulo" type="text" class="form-control" ng-model="frmNoticia.not_subtitulo">
+
+		            		<label><small>Cuerpo</small></label>
+							<div name="not_contenido" ckeditor="options" ng-model="frmNoticia.not_contenido" ready="onReady()"></div>
+
+		            		<label><small>Link</small></label>
+		            		<input name="not_url" type="text" class="form-control" ng-model="frmNoticia.not_url">
+
+		            		<label><small>Imagen</small></label>
+		            		<input name="not_imagen" type="file" class="form-control" ng-model="frmNoticia.not_imagen">
+		            		
+		            	</div>
+	            	</div>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	                <button type="submit" class="btn btn-danger">Guardar Noticia</button>
+	            </div>
+	        </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEditarNoticia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        	<form ng-submit="editarNoticia();" name="frmNoticiaEditar" id="frmNoticiaEditar">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">Editar Noticia</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<div class="row">
+		            	<div class="col-sm-12">
+		            		<input name="not_titulo" type="hidden" class="form-control" ng-model="frmNoticia.idNoticia">
+		            		
+		            		<label><small>Título</small></label>
+		            		<input name="not_titulo" type="text" class="form-control" ng-model="frmNoticia.not_titulo">
+
+		            		<label><small>Sub título</small></label>
+		            		<input name="not_subtitulo" type="text" class="form-control" ng-model="frmNoticia.not_subtitulo">
+
+		            		<label><small>Cuerpo</small></label>
+							<div name="not_contenido" ckeditor="options" ng-model="frmNoticia.not_contenido" ready="onReady()"></div>
+
+		            		<label><small>Link</small></label>
+		            		<input name="not_url" type="text" class="form-control" ng-model="frmNoticia.not_url">
+
+		            		<label><small>Imagen</small></label>
+		            		<input name="not_imagen" type="file" class="form-control" ng-model="frmNoticia.not_imagen">
+		            	</div>
+	            	</div>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	                <button type="submit" class="btn btn-danger">Actualizar Noticia</button>
+	            </div>
+	        </form>
+        </div>
+    </div>
+</div>

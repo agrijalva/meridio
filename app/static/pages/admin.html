@@ -1,0 +1,85 @@
+<div class=dashboard-page>
+    <div class="header-admin">
+        <div class="container">
+        	<div class="row">
+	        	<div class="col-sm-6">
+	        		<div class="header-icons">
+		        		<i class="fa fa-bars burguer-menu" aria-hidden="true" ng-click="showMenu();"></i>
+		        		<img src="images/logo_meridio_blanco_hor.png" class="logo-menu" width="200" class="logo">
+	        		</div>
+	        	</div>
+	        	<div class="col-sm-6">
+	        		<div class="panel-perfil pull-right">
+	        			<div class="per-nombre">Alejandro Grijalva Antonio</div>
+	        		</div>
+	        	</div>
+        	</div>
+        </div>
+    </div>
+
+    <div class="menu-wrap" style="display: none;" ng-click="hideMenuParent($event);">
+	    <div class="vertical-menu">
+	    	<div class="nav-header">
+		    	<div class="hideMenu" ng-click="hideMenu()">
+		    		<i class="fa fa-times"></i>
+		    	</div>
+		    	<center>
+		    		<img src="images/logo_meridio_blanco.png" width="150">
+		    		<br><br>
+		    		<span>Alejandro Grijalva Antonio</span>
+		    	</center>
+		    </div>
+		    <div class="nav-content">
+		    	<ul class="nav">
+					<li ng-click="pnlNoticias()">
+						<table width="100%" border="0">
+							<tr>
+								<!-- <td width="25"><i class="fa fa-newspaper-o" aria-hidden="true"></i></td> -->
+								<td>Enlaces</td>
+							</tr>
+						</table>
+					</li>
+					<li ng-click="pnlConocenos()">
+						<table width="100%" border="0">
+							<tr>
+								<!-- <td width="25"><i class="fa fa-user-circle-o" aria-hidden="true"></i></td> -->
+								<td>Conócenos</td>
+							</tr>
+						</table>
+					</li>
+					<li ng-click="pnlFavoritos()">
+						<table width="100%" border="0">
+							<tr>
+								<!-- <td width="25"><i class="fa fa-lock" aria-hidden="true"></i></td> -->
+								<td>Mis sitios favoritos</td>
+							</tr>
+						</table>
+					</li>
+					<li ng-click="pnlAyuda()">
+						<table width="100%" border="0">
+							<tr>
+								<!-- <td width="25"><i class="fa fa-pencil" aria-hidden="true"></i></td> -->
+								<td>Ayuda</td>
+							</tr>
+						</table>
+					</li>
+					<li ng-click="close()">
+						<table width="100%" border="0">
+							<tr>
+								<!-- <td width="25"><i class="fa fa-times-circle" aria-hidden="true"></i></td> -->
+								<td>Cerrar sesión</td>
+							</tr>
+						</table>
+					</li>
+				</ul>
+
+				<div class="img-tec-negro">
+					<img src="images/logo_tec_negro.png" width="120">
+				</div>
+		    </div>
+	    </div>
+    </div>
+
+    <!-- <div class="contenido" ui-view> </div> -->
+    <div class="contenido col-sm-12 main" ui-view> </div>
+</div>

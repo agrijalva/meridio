@@ -1,0 +1,94 @@
+<!doctype html> 
+<html class=no-js>
+    <head>
+        <meta charset=utf-8>
+        <title>Calculadora</title>
+        <meta name=description>
+        <meta name=viewport content="width=device-width">
+        <link rel=stylesheet href=css/main.css>
+        <link rel=stylesheet href=css/rcv.css>
+        <link rel=stylesheet href="css/font-awesome/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <!-- Material Design -->
+        <link rel="stylesheet" type="text/css" href="bower_components/materialDesign/angular-material.min.css">
+    </head>
+    <body ng-app=yapp>
+        <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->  
+        <div>
+            <div ui-view></div>
+        </div>
+        <script> /*
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            
+            ga('create', 'UA-XXXXX-X');
+            ga('send', 'pageview'); */
+        </script> <!--[if lt IE 9]>
+        <script src="scripts/oldieshim.js"></script>
+        <![endif]--> 
+        <script src=scripts/vendor.js></script>
+        <!-- Material Design -->
+        <script type="text/javascript" src="bower_components/materialDesign/moment.min.js"></script>
+        <script type="text/javascript" src="bower_components/materialDesign/angular-aria.min.js"></script>
+        <script type="text/javascript" src="bower_components/materialDesign/angular-messages.min.js"></script>
+        <script type="text/javascript" src="bower_components/materialDesign/angular-material.min.js"></script>
+        
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        
+        <script src="node_modules/angular-ckeditor/bower_components/ckeditor/ckeditor.js"></script>
+        <script src="node_modules/angular-ckeditor/angular-ckeditor.js"></script>
+
+
+        <script src=scripts/scripts.js></script> 
+
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script> -->
+        <script type="text/javascript" src="scripts/recursos/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="bower_components/ui-carousel-master/dist/ui-carousel.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bower_components/ui-carousel-master/dist/ui-carousel.min.css">
+
+        <!-- Autocomplete -->
+        <link rel="stylesheet" type="text/css" href="scripts/angucomplete-alt/angucomplete-alt.css">
+        <script src="scripts/angucomplete-alt/angucomplete-alt.js"></script>
+
+        <!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+        <script type="text/javascript" src="scripts/recursos/bootstrap.min.js"></script>
+
+        <!-- slick -->
+        <!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/> -->
+        <!-- <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="scripts/recursos/slick.css"/>
+        <script type="text/javascript" src="scripts/recursos/slick.min.js"></script>        
+
+        <!-- Sweetalert -->
+        <link rel="stylesheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css">
+        <script type="text/javascript" src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+
+        <link rel="stylesheet" href="bower_components/DataTables/jquery.dataTables.min.css"/>
+        <script type="text/javascript" src="bower_components/DataTables/jquery.dataTables.min.js"></script>
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-datatables/2.1.0/angular-datatables.js"></script> -->
+
+        <script src="pages/login/login.controller.js"></script>
+        <script src="pages/login/login.factory.js"></script>
+
+        <script type="text/javascript" src="pages/admin.controller.js"></script>
+
+        <!-- Perfil -->
+        <script type="text/javascript" src="pages/perfil/perfil.controller.js"></script>
+        <script type="text/javascript" src="pages/perfil/perfil.factory.js"></script>
+        <script type="text/javascript" src="pages/perfil/perfil.directive.js"></script>
+
+        <!-- Noticia -->
+        <script type="text/javascript" src="pages/noticia/noticia.controller.js"></script>
+        <script type="text/javascript" src="pages/noticia/noticia.factory.js"></script>
+        <script type="text/javascript" src="pages/noticia/noticia.directive.js"></script>
+
+        <!-- Favoritos -->
+        <script type="text/javascript" src="pages/guardado/guardado.controller.js"></script>
+        <script type="text/javascript" src="pages/guardado/guardado.factory.js"></script>
+        <script type="text/javascript" src="pages/guardado/guardado.directive.js"></script>
+    </body>
+</html>
