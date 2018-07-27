@@ -1,4 +1,4 @@
-var Path_Noticia      = API_Path + '/noticia/';
+var Path_Favorito      = API_Path + '/noticia/';
 
 app.factory( 'FavoritosFactory', function( $http ){
 	return {
@@ -7,7 +7,7 @@ app.factory( 'FavoritosFactory', function( $http ){
             var oData = new FormData(form);
             oData.append("not_contenido", contenido);
             return $http({
-                url: Path_Noticia + 'nueva/',
+                url: Path_Favorito + 'nueva/',
                 method: "POST",
                 data: oData,
                 headers: {
@@ -24,7 +24,7 @@ app.factory( 'FavoritosFactory', function( $http ){
             oData.append("not_contenido", data.not_contenido);
             oData.append("not_url", data.not_url);
             return $http({
-                url: Path_Noticia + 'editar/',
+                url: Path_Favorito + 'editar/',
                 method: "POST",
                 data: oData,
                 headers: {
@@ -34,7 +34,7 @@ app.factory( 'FavoritosFactory', function( $http ){
         },
         todas: function() {
             return $http({
-                url: Path_Noticia + 'todas/',
+                url: Path_Favorito + 'todas/',
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ app.factory( 'FavoritosFactory', function( $http ){
         },
         eliminar: function( idNoticia ) {
             return $http({
-                url: Path_Noticia + 'eliminar/',
+                url: Path_Favorito + 'eliminar/',
                 method: "POST",
                 params: {
                     idNoticia: idNoticia

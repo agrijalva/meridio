@@ -1,4 +1,4 @@
-<div class="panel-body" ng-repeat="not in Noticias.data | filter: search | startFrom:currentPage*pageSize | limitTo:pageSize">
+<div class="panel-body" ng-repeat="not in Noticias.data | filter: search">
 	<div class="col-sm-12 pnl-titulo">
 			<div> <img src="https://www.google.com/s2/favicons?domain=www.youtube.com" width="12"> <small>www.youtube1.com</small></div>
 		<b ng-bind-html="not.not_titulo"></b>
@@ -60,7 +60,7 @@
 </div>
 
 
-<div class="panel-body" ng-repeat="not in Noticias.data | filter: search | startFrom:currentPage*pageSize | limitTo:pageSize">
+<div class="panel-body" ng-repeat="not in Noticias.data | filter: search">
     <div class="col-sm-12 pnl-titulo">
             <div> <img src="https://www.google.com/s2/favicons?domain=www.facebook.com" width="12"> <small>www.facebook.com</small></div>
         <b ng-bind-html="not.not_titulo"></b>

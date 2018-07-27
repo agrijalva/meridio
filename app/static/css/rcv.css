@@ -329,3 +329,8 @@
 .catego li a.active{
 	color: #0434bf;
 }
+
+.panel-body a{
+	color: black;
+	font-family: 'Raleway', sans-serif;
+}

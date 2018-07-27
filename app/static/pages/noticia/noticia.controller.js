@@ -5,6 +5,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 	};
 
 	$scope.currentPage = 0;
+    $scope.contentLinks = 0;
     $scope.pageSize = 10;
     $scope.Noticias = [];
     $scope.numberOfPages=function(){
@@ -21,6 +22,35 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 		not_url: '',
 		not_imagen: ''
 	}
+
+    $scope.getCategorias = function(){
+        noticiaFactory.categorias().then(function(response){
+            $scope.categorias = response.data;
+            // if( response.data.success ){
+            //     swal("Noticias", "Noticia guardada correctamente." );
+            //     $scope.init();
+            //     $("#modalNuevaNoticia").modal("hide");
+            // }
+            // else{
+            //     swal("Noticias", response.data.msg );
+            // }
+        });
+    }
+
+    $scope.enlacesTodas = function(){
+        noticiaFactory.enlacesTodas().then(function(response){
+            $scope.contentLinks = response.data.length;
+            if( response.data.length != 0 ){
+                $scope.Enlaces = response.data;
+            //     swal("Noticias", "Noticia guardada correctamente." );
+            //     $scope.init();
+            //     $("#modalNuevaNoticia").modal("hide");
+            }
+            else{
+                swal("Noticias", response.data.msg );
+            }
+        });
+    }
 
     $scope.openNewNews = function(){
     	$scope.frmNoticia = {
@@ -86,11 +116,12 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     }
 
     $scope.init = function(){
-    	noticiaFactory.todas().then(function(response){
-    		$scope.Noticias = response.data;
-    		// $scope.data = $scope.Noticias.data
-    		console.log("Noticias", $scope.Noticias);
-    	});
+        $scope.getCategorias();
+    	// noticiaFactory.todas().then(function(response){
+    	// 	$scope.Noticias = response.data;
+    	// 	// $scope.data = $scope.Noticias.data
+    	// 	console.log("Noticias", $scope.Noticias);
+    	// });
     }
 
     $scope.eliminar = function( idNoticia ){

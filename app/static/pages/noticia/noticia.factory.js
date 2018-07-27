@@ -1,7 +1,27 @@
-var Path_Noticia      = API_Path + '/noticia/';
+var Path_Noticia      = API_Path + '/categoria/';
+var Path_Enlaces      = API_Path + '/enlaces/';
 
 app.factory( 'noticiaFactory', function( $http ){
 	return {
+        categorias: function() {
+            return $http({
+                url: Path_Noticia + 'categorias/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        enlacesTodas: function() {
+            return $http({
+                url: Path_Enlaces + 'enlacesTodas/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
         guardaNoticia: function( contenido ) {
             var form = document.forms.namedItem("frmNoticia");
             var oData = new FormData(form);
