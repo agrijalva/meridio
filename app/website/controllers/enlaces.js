@@ -36,15 +36,20 @@ Enlaces.prototype.get_enlacesTodas = function(req, res, next) {
     });
 };
 
-Enlaces.prototype.get_enlacesByIdCat = function(req, res, next) {
+Enlaces.prototype.get_busquedaEnlaces = function(req, res, next) {
     var self = this;
     var params = [];
     var params = [
-        { name: 'busqueda', value: req.query.busqueda, type: self.model.types.STRING },
-        { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT }
+        { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },
+        { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT },
+        { name: 'idTema', value: req.query.idTema, type: self.model.types.INT },
+        { name: 'titulo', value: req.query.titulo, type: self.model.types.STRING },
+        { name: 'descripcion', value: req.query.descripcion, type: self.model.types.STRING },
+        { name: 'clave', value: req.query.clave, type: self.model.types.STRING },
+        { name: 'idIdioma', value: req.query.idIdioma, type: self.model.types.STRING }
     ];
 
-    this.model.query('SEL_ENLACES_SP', params, function(error, result) {
+    this.model.query('ENL_BUSQUEDA_SP', params, function(error, result) {
         self.view.expositor(res, {
             error: error,
             result: result
