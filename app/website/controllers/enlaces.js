@@ -25,9 +25,26 @@ Enlaces.prototype.get_enlacesTodas = function(req, res, next) {
     // var params = [{ name: 'idBanco', value: req.query.idBanco, type: self.model.types.INT },
     //               { name: 'idEmpresa', value: req.query.idEmpresa, type: self.model.types.STRING }
     //               ];
+    
     var params = [];
 
     this.model.query('ENL_TODAS_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Enlaces.prototype.get_enlacesByIdCat = function(req, res, next) {
+    var self = this;
+    var params = [];
+    var params = [
+        { name: 'busqueda', value: req.query.busqueda, type: self.model.types.STRING },
+        { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT }
+    ];
+
+    this.model.query('SEL_ENLACES_SP', params, function(error, result) {
         self.view.expositor(res, {
             error: error,
             result: result
