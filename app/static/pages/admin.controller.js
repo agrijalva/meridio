@@ -5,7 +5,7 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
         $scope.idCatalogoUsuario = $scope.DataUser.idCatalogoUsuario;
     }
     catch( e ){
-        $location.path("/login");
+        // $location.path("/login");
     }
     
     $scope.pnlConocenos = function(){

@@ -13,21 +13,22 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
     		swal("Calculadora", 'Proporciona tu contrasema para poder acceder al sistema');
     	}
     	else{
-	    	loginFactory.login( $scope.user, $scope.pass ) .then(function(result){
-	    		var Resultado = result.data;
-	    		if( Resultado.success ){
-                    localStorage.setItem("RCVUserData", JSON.stringify(Resultado.data));
+            $location.path("/enlaces/home");
+	    	// loginFactory.login( $scope.user, $scope.pass ) .then(function(result){
+	    	// 	var Resultado = result.data;
+	    	// 	if( Resultado.success ){
+      //               localStorage.setItem("RCVUserData", JSON.stringify(Resultado.data));
 
-                    $location.path("/enlaces/home");
-	    		}
+      //               $location.path("/enlaces/home");
+	    	// 	}
 
-                switch( parseInt(Resultado.code) ){
-                    case 400: swal("Calculadora", "El email que proporcionó no es válido."); break;
-                    case 410: swal("Calculadora", "La contraseña no es correcta."); break;
-                }
-	        }, function(error){
-	            console.log("Error", error);
-	        });
+      //           switch( parseInt(Resultado.code) ){
+      //               case 400: swal("Calculadora", "El email que proporcionó no es válido."); break;
+      //               case 410: swal("Calculadora", "La contraseña no es correcta."); break;
+      //           }
+	     //    }, function(error){
+	     //        console.log("Error", error);
+	     //    });
     	}
     }
 

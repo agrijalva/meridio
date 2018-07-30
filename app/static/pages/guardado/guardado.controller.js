@@ -1,5 +1,5 @@
 app.controller("FavoritosCtrl", ["$scope", "$sce", "$location","filterFilter","FavoritosFactory", function($scope, $sce, $location, filterFilter, FavoritosFactory ) {
-    $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
+    // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
     $scope.editorOptions = {
 	    // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
 	};

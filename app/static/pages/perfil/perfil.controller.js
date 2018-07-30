@@ -1,6 +1,6 @@
 app.controller("PerfilCtrl", ["$scope", "$sce", "$location","filterFilter","perfilFactory", function($scope, $sce, $location, filterFilter, perfilFactory ) {
-    $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
-    $scope.frmDataUser      = JSON.parse( localStorage.getItem("RCVUserData") );
+    // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
+    // $scope.frmDataUser      = JSON.parse( localStorage.getItem("RCVUserData") );
     $scope.panelPerfil		= {
 	    ver: true,
 		editar: false,

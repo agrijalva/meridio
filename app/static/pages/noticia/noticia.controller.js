@@ -1,5 +1,5 @@
 app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","noticiaFactory", function($scope, $sce, $location, filterFilter, noticiaFactory ) {
-    $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
+    // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
     $scope.editorOptions = {
 	    // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
 	};
