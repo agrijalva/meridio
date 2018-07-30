@@ -71,4 +71,8 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
         }, 500);
         
     }
+
+    setTimeout(function(){
+        $(".loading").fadeOut();
+    },500)
 }]);

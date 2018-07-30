@@ -26,6 +26,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     $scope.getCategorias = function(){
         noticiaFactory.categorias().then(function(response){
             $scope.categorias = response.data;
+            // $(".loading").fadeOut();
             // if( response.data.success ){
             //     swal("Noticias", "Noticia guardada correctamente." );
             //     $scope.init();
@@ -38,6 +39,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     }
 
     $scope.enlacesTodas = function(){
+        $(".loading").fadeIn();
         noticiaFactory.enlacesTodas().then(function(response){
             $scope.contentLinks = response.data.length;
             if( response.data.length != 0 ){
@@ -49,6 +51,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             else{
                 swal("Noticias", response.data.msg );
             }
+            $(".loading").fadeOut();
         });
     }
 
