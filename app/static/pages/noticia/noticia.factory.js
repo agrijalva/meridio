@@ -1,5 +1,7 @@
 var Path_Noticia      = API_Path + '/categoria/';
 var Path_Enlaces      = API_Path + '/enlaces/';
+var Path_Tema         = API_Path + '/tema/';
+var Path_Idioma         = API_Path + '/idioma/';
 
 app.factory( 'noticiaFactory', function( $http ){
 	return {
@@ -12,10 +14,45 @@ app.factory( 'noticiaFactory', function( $http ){
                 }
             });
         },
+
+        temaByIdCat: function(idCategoria) {
+            return $http({
+                url: Path_Tema + 'temaByIdCat/',
+                method: "GET",
+                params: {
+                    idCategoria: idCategoria
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        idiomas: function() {
+            return $http({
+                url: Path_Idioma + 'idiomas/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
         enlacesTodas: function() {
             return $http({
                 url: Path_Enlaces + 'enlacesTodas/',
                 method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        busquedaEnlaces: function( parametros ) {
+            return $http({
+                url: Path_Enlaces + 'busquedaEnlaces/',
+                method: "GET",
+                params: parametros,
                 headers: {
                     'Content-Type': 'application/json'
                 }

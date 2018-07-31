@@ -20,47 +20,47 @@
 						<div class="frm-search">
 							<div class="pnl-search">
 								<i class="fa fa-search"></i>
-								<input type="" name="" placeholder="Escribe algo">
+								<input type="" name="" placeholder="Escribe algo" ng-model="busquedaGeneral">
 							</div>
 
 							<div class="no-resultados">
-								<span class="panel-title">319</span><small>Resultados</small>
+								<span class="panel-title">{{ contentLinks }}</span><small>Resultados</small>
 							</div>
 							<br>
-							<label><small>Categoría</small></label>
-							<select class="form-control-search">
-								<option value="0">Todas</option>
-								<option ng-repeat="(key, cat) in categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
-							</select>
+
+							<div class="text-center filtros-control more-filter" ng-click="filtrosControl(1)"><small>Más filtros<br></small>﹀</div>
 
 
-							<label><small>Materia</small></label>
-							<input type="" class="form-control-search" name="">
+							<div style="display: none;" class="filters">
+								<label><small>Categoría</small></label>
+								<select class="form-control-search" ng-change="temaByIdCat( busqueda.idCategoria )" ng-model="busqueda.idCategoria">
+									<option value="0" selected="">Todas</option>
+									<option ng-repeat="(key, cat) in categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
+								</select>
 
-							<label><small>Tema</small></label>
-							<!-- <div>
-								<div angucomplete-alt id="ex1"
-								  placeholder="Selecciona el tema"
-								  maxlength="50"
-								  pause="100"
-								  selected-object="categorias"
-								  local-data="categorias"
-								  search-fields="categoria"
-								  title-field="categoria"
-								  minlength="3"
-								  input-class="form-control-search"
-								  match-class="highlight"></div>
-							</div> -->
-							<select class="form-control-search">
-								<option value="0">Todas</option>
-								<option ng-repeat="(key, cat) in categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
-							</select>
+								<label><small>Tema</small></label>
+								<select class="form-control-search" ng-model="busqueda.idTema">
+									<option value="0" selected="">Todas</option>
+									<option ng-repeat="(key, tem) in temas" value="{{tem.idTema}}">{{ tem.tema }}</option>
+								</select>
 
-							<label><small>Título</small></label>
-							<input type="" class="form-control-search" name="">
+								<label><small>Título</small></label>
+								<input type="" class="form-control-search" name="" ng-model="busqueda.titulo">
 
-							<label><small>Palabras Clave</small></label>
-							<input type="" class="form-control-search" name="">
+								<label><small>Descripción</small></label>
+								<input type="" class="form-control-search" name="" ng-model="busqueda.descripcion">
+
+								<label><small>Palabras Clave</small></label>
+								<input type="" class="form-control-search" name="" ng-model="busqueda.clave">
+
+								<label><small>Idioma</small></label>
+								<select class="form-control-search" ng-model="busqueda.idIdioma">
+									<option value="0" selected="">Todas</option>
+									<option ng-repeat="(key, idi) in idiomas" value="{{idi.idIdioma}}">{{ idi.idioma }}</option>
+								</select>
+
+								<div class="text-center filtros-control" ng-click="filtrosControl(2)"> ︿<small><br>Menos filtros</small> </div>
+							</div>
 
 							<button class="btn btn-success btn-sm btn-buscar" ng-click="enlacesTodas()">Buscar</button>
 						</div>
@@ -175,7 +175,7 @@
 				
     		</div>
 
-    		<div class="col-sm-12" ng-show="contentLinks != 0">
+    		<div class="col-sm-12 hidden" >
     			<div class="pull-right">
 	    			<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
 				        Anterior

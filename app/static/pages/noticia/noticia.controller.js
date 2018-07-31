@@ -23,36 +23,73 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 		not_imagen: ''
 	}
 
+    $scope.busqueda = {
+        idCategoria: 0,
+        idTema: 0,
+        titulo: '',
+        descripcion: '',
+        clave: '',
+        idIdioma: 0
+    }
+
+    $scope.busquedaGeneral = '';
+
     $scope.getCategorias = function(){
         noticiaFactory.categorias().then(function(response){
             $scope.categorias = response.data;
-            // $(".loading").fadeOut();
-            // if( response.data.success ){
-            //     swal("Noticias", "Noticia guardada correctamente." );
-            //     $scope.init();
-            //     $("#modalNuevaNoticia").modal("hide");
-            // }
-            // else{
-            //     swal("Noticias", response.data.msg );
-            // }
+        });
+    }
+
+    $scope.temaByIdCat = function( idCategoria ){
+        noticiaFactory.temaByIdCat( idCategoria ).then(function(response){
+            $scope.temas = response.data;
+            if( $scope.temas.length == 0 )
+                $scope.busqueda.idTema = 0;
+        });
+    }
+
+    $scope.getIdiomas = function(){
+        noticiaFactory.idiomas().then(function(response){
+            $scope.idiomas = response.data;
         });
     }
 
     $scope.enlacesTodas = function(){
         $(".loading").fadeIn();
-        noticiaFactory.enlacesTodas().then(function(response){
+        
+        if( $scope.filtros == 2 ){
+            if( $scope.busquedaGeneral == '' ){
+                swal("Meridio","Debes especificar tus palabras de búsqueda");
+                $(".loading").fadeOut();
+                return false;
+            }
+            $scope.busqueda.titulo = $scope.busquedaGeneral;
+            $scope.busqueda.descripcion = $scope.busquedaGeneral;
+        }
+
+        noticiaFactory.busquedaEnlaces( $scope.busqueda ).then(function(response){
             $scope.contentLinks = response.data.length;
             if( response.data.length != 0 ){
                 $scope.Enlaces = response.data;
-            //     swal("Noticias", "Noticia guardada correctamente." );
-            //     $scope.init();
-            //     $("#modalNuevaNoticia").modal("hide");
             }
             else{
-                swal("Noticias", response.data.msg );
+                swal("Meridio", "No se encontraron resultados");
             }
             $(".loading").fadeOut();
         });
+    }
+
+    $scope.filtros = 2;
+    $scope.filtrosControl = function( op ){
+        $scope.filtros = op;
+        if( op == 1 ){
+            $(".more-filter").hide();
+            $(".filters").show();
+        }
+        else{
+            $(".more-filter").show();
+            $(".filters").hide();
+        }
     }
 
     $scope.openNewNews = function(){
@@ -120,6 +157,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 
     $scope.init = function(){
         $scope.getCategorias();
+        $scope.getIdiomas();
     	// noticiaFactory.todas().then(function(response){
     	// 	$scope.Noticias = response.data;
     	// 	// $scope.data = $scope.Noticias.data

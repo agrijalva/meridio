@@ -361,3 +361,11 @@
 	padding-right: 0px;
 	padding-left: 0px;
 }
+
+.filtros-control{
+	cursor: pointer;
+}
+
+.filtros-control small:hover{
+	color: blue;
+}
