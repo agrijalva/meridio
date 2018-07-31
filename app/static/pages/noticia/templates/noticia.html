@@ -20,11 +20,11 @@
 						<div class="frm-search">
 							<div class="pnl-search">
 								<i class="fa fa-search"></i>
-								<input type="" name="" placeholder="Escribe algo" ng-model="busquedaGeneral">
+								<input type="" name="" placeholder="Escribe algo" ng-model="busquedaGeneral" ng-keyup="keyEnter($event)">
 							</div>
 
 							<div class="no-resultados">
-								<span class="panel-title">{{ contentLinks }}</span><small>Resultados</small>
+								<span class="panel-title">{{ contentLinks }}</span><small><i>Resultado</i><i ng-hide="contentLinks == 1">s<i/></small>
 							</div>
 							<br>
 

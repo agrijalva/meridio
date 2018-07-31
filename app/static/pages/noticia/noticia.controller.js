@@ -56,7 +56,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 
     $scope.enlacesTodas = function(){
         $(".loading").fadeIn();
-        
+
         if( $scope.filtros == 2 ){
             if( $scope.busquedaGeneral == '' ){
                 swal("Meridio","Debes especificar tus palabras de búsqueda");
@@ -90,6 +90,11 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             $(".more-filter").show();
             $(".filters").hide();
         }
+    }
+
+    $scope.keyEnter = function( event ){
+        if( event.keyCode == 13 )
+            $scope.enlacesTodas();
     }
 
     $scope.openNewNews = function(){
