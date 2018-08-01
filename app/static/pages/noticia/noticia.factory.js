@@ -1,7 +1,10 @@
 var Path_Noticia      = API_Path + '/categoria/';
 var Path_Enlaces      = API_Path + '/enlaces/';
 var Path_Tema         = API_Path + '/tema/';
-var Path_Idioma         = API_Path + '/idioma/';
+var Path_Idioma       = API_Path + '/idioma/';
+var Path_Formato      = API_Path + '/formato/';
+var Path_Fuente       = API_Path + '/fuente/';
+var Path_Licencia     = API_Path + '/Licencia/';
 
 app.factory( 'noticiaFactory', function( $http ){
 	return {
@@ -27,6 +30,42 @@ app.factory( 'noticiaFactory', function( $http ){
                 }
             });
         },
+
+
+
+
+        getFormato: function() {
+            return $http({
+                url: Path_Formato + 'formato/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        getFuente: function() {
+            return $http({
+                url: Path_Fuente + 'fuente/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        getLicencia: function() {
+            return $http({
+                url: Path_Licencia + 'licencia/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+
+
 
         temaByIdCat: function(idCategoria) {
             return $http({
@@ -64,6 +103,17 @@ app.factory( 'noticiaFactory', function( $http ){
         busquedaEnlaces: function( parametros ) {
             return $http({
                 url: Path_Enlaces + 'busquedaEnlaces/',
+                method: "GET",
+                params: parametros,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        nuevoEnlace: function( parametros ) {
+            return $http({
+                url: Path_Enlaces + 'nuevoEnlace/',
                 method: "GET",
                 params: parametros,
                 headers: {

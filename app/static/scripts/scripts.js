@@ -23,6 +23,14 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         controller: "linkCtrl"
     })
 
+    .state("gestor", {
+        url: "/gestor",
+        parent: "base",
+        cache:false,
+        templateUrl: "pages/gestor/gestor.html",
+        controller: "gestorCtrl"
+    })
+
     .state("enlaces", {
         url: "/enlaces",
         parent: "base",

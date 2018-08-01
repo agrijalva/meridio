@@ -3,5 +3,8 @@ module.exports = {
      categoria: require('./controllers/categoria'),
      enlaces: require('./controllers/enlaces'),
      idioma: require('./controllers/idioma'),
-     tema: require('./controllers/tema')
+     tema: require('./controllers/tema'),
+     formato: require('./controllers/formato'),
+     fuente: require('./controllers/fuente'),
+     licencia: require('./controllers/licencia')
  }
