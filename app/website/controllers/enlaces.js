@@ -36,6 +36,18 @@ Enlaces.prototype.get_enlacesTodas = function(req, res, next) {
     });
 };
 
+Enlaces.prototype.get_getById = function(req, res, next) {
+    var self = this;
+    var params = [{ name: 'idEnlace', value: req.query.idEnlace, type: self.model.types.STRING } ];
+
+    this.model.query('ENL_SOLOUNO_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result[0]
+        });
+    });
+};
+
 Enlaces.prototype.get_busquedaEnlaces = function(req, res, next) {
     var self = this;
     var params = [];

@@ -15,6 +15,19 @@ app.factory( 'noticiaFactory', function( $http ){
             });
         },
 
+        getById: function( idEnlace ) {
+            return $http({
+                url: Path_Enlaces + 'getById/',
+                method: "GET",
+                params: {
+                    idEnlace: idEnlace
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
         temaByIdCat: function(idCategoria) {
             return $http({
                 url: Path_Tema + 'temaByIdCat/',
