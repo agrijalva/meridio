@@ -4,7 +4,8 @@ var Path_Tema         = API_Path + '/tema/';
 var Path_Idioma       = API_Path + '/idioma/';
 var Path_Formato      = API_Path + '/formato/';
 var Path_Fuente       = API_Path + '/fuente/';
-var Path_Licencia     = API_Path + '/Licencia/';
+var Path_Licencia     = API_Path + '/licencia/';
+var Path_Actividad    = API_Path + '/actividad/';
 
 app.factory( 'noticiaFactory', function( $http ){
 	return {
@@ -31,8 +32,48 @@ app.factory( 'noticiaFactory', function( $http ){
             });
         },
 
+        favoritoAdd: function( idUsuario, idEnlace ) {
+            return $http({
+                url: Path_Actividad + 'favoritoAdd/',
+                method: "GET",
+                params: {
+                    idUsuario: idUsuario,
+                    idEnlace: idEnlace
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
 
+        favoritoRemove: function( idUsuario, idEnlace ) {
+            return $http({
+                url: Path_Actividad + 'favoritoRemove/',
+                method: "GET",
+                params: {
+                    idUsuario: idUsuario,
+                    idEnlace: idEnlace
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
 
+        favoritoUsuario: function( idUsuario ) {
+            return $http({
+                url: Path_Actividad + 'favoritoUsuario/',
+                method: "GET",
+                params: {
+                    idUsuario: idUsuario
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        
 
         getFormato: function() {
             return $http({

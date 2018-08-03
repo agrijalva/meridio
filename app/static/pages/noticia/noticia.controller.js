@@ -8,6 +8,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     $scope.contentLinks = 0;
     $scope.pageSize = 10;
     $scope.Noticias = [];
+    $scope.idUsuario = 1;
     $scope.numberOfPages=function(){
     	if( $scope.Noticias.success ){
 	        return Math.ceil($scope.Noticias.data.length/$scope.pageSize);
@@ -24,6 +25,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 	}
 
     $scope.busqueda = {
+        idUsuario: 1,
         idCategoria: 0,
         idTema: 0,
         titulo: '',
@@ -46,6 +48,20 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             if( $scope.temas.length == 0 )
                 $scope.busqueda.idTema = 0;
         });
+    }
+
+    $scope.favoritoAdd = function( idEnlace, key ){
+        noticiaFactory.favoritoAdd( $scope.idUsuario, idEnlace ).then(function(response){
+            $scope.temas = response.data;
+            $scope.Enlaces[ key ].guardado = 1;
+        });   
+    }
+
+    $scope.favoritoRemove = function( idEnlace, key ){
+        noticiaFactory.favoritoRemove( $scope.idUsuario, idEnlace ).then(function(response){
+            $scope.temas = response.data;
+            $scope.Enlaces[ key ].guardado = 0;
+        });   
     }
 
     $scope.getIdiomas = function(){
@@ -74,6 +90,18 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             }
             else{
                 swal("Meridio", "No se encontraron resultados");
+            }
+            $(".loading").fadeOut();
+        });
+    }
+
+
+    $scope.favoritoUsuario = function(){
+        noticiaFactory.favoritoUsuario( $scope.idUsuario ).then(function(response){
+            $(".loading").fadeIn();
+            $scope.contentLinks = response.data.length;
+            if( response.data.length != 0 ){
+                $scope.Enlaces = response.data;
             }
             $(".loading").fadeOut();
         });

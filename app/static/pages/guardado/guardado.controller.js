@@ -22,6 +22,17 @@ app.controller("FavoritosCtrl", ["$scope", "$sce", "$location","filterFilter","F
 		not_imagen: ''
 	}
 
+    $scope.favoritoUsuario = function(){
+        FavoritosFactory.favoritoUsuario( $scope.idUsuario ).then(function(response){
+            $(".loading").fadeIn();
+            $scope.contentLinks = response.data.length;
+            if( response.data.length != 0 ){
+                $scope.Enlaces = response.data;
+            }
+            $(".loading").fadeOut();
+        });
+    }
+
     $scope.openNewNews = function(){
     	$scope.frmNoticia = {
 			idNoticia: 0,

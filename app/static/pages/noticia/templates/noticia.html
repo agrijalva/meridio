@@ -85,7 +85,7 @@
 						  	</div>
 
 						  	<div>
-						  		<div class="panel-body" ng-repeat="enlace in Enlaces | filter: search" >
+						  		<div class="panel-body" ng-repeat="( key, enlace ) in Enlaces | filter: search" >
 									<div class="col-sm-12 pnl-titulo">
 										<div> <img src="https://www.google.com/s2/favicons?domain={{enlace.fuente}}" width="12"> <small>{{enlace.fuente}}</small></div>
 										<a href="{{enlace.URL}}" target="_blank">
@@ -135,13 +135,6 @@
 								    	<table width="100%" border="0">
 								    		<tr>
 								    			<td width="40" align="center">
-								    				<i class="fa fa-star-o ico-social" aria-hidden="true"></i>
-								    			</td>
-								    			<td width="50">0</td>
-
-								    			<td width="10">&nbsp;</td>
-
-												<td width="40" align="center">
 													<i class="fa fa-eye ico-social" aria-hidden="true"></i>
 												</td>
 								    			<td width="50">0</td>
@@ -149,7 +142,9 @@
 								    			<td></td>
 								    			
 												<td width="40">
-													<i class="fa fa-bookmark-o ico-social" style="cursor: pointer;" aria-hidden="true"></i>
+													<i ng-show="enlace.guardado == 0" class="fa fa-star-o ico-social" style="cursor: pointer;" aria-hidden="true" ng-click="favoritoAdd( enlace.idEnlace, key );"></i>
+
+													<i ng-show="enlace.guardado == 1" class="fa fa-star ico-social" style="cursor: pointer;" aria-hidden="true" ng-click="favoritoRemove( enlace.idEnlace, key );"></i>
 												</td>
 								    		</tr>
 								    	</table>

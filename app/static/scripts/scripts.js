@@ -82,7 +82,7 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         parent: "enlaces",
         cache:false,
         templateUrl: "pages/guardado/templates/guardado.html",
-        controller: "FavoritosCtrl"
+        controller: "NoticiaCtrl"
     })
 
     .state("perfil", {

@@ -6,5 +6,6 @@ module.exports = {
      tema: require('./controllers/tema'),
      formato: require('./controllers/formato'),
      fuente: require('./controllers/fuente'),
-     licencia: require('./controllers/licencia')
+     licencia: require('./controllers/licencia'),
+     actividad: require('./controllers/actividad')
  }

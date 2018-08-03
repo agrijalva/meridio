@@ -50,7 +50,6 @@ Enlaces.prototype.get_getById = function(req, res, next) {
 
 Enlaces.prototype.get_busquedaEnlaces = function(req, res, next) {
     var self = this;
-    var params = [];
     var params = [
         { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },
         { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT },
@@ -71,7 +70,6 @@ Enlaces.prototype.get_busquedaEnlaces = function(req, res, next) {
 
 Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {
     var self = this;
-    var params = [];
     var params = [
         { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },
         { name: 'titulo', value: req.query.titulo, type: self.model.types.STRING },
