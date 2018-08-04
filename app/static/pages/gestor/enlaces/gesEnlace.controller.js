@@ -1,7 +1,6 @@
-app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function($scope, $location, noticiaFactory) {
-    $scope.user = '';
-    $scope.pass = '';
-
+app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","gesEnlaceFactory", "noticiaFactory", function($scope, $sce, $location, filterFilter, gesEnlaceFactory, noticiaFactory ) {
+    // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
+    
     $scope.datosEnlace = {
         idUsuario: 1,
         titulo: '',
@@ -15,71 +14,6 @@ app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function(
         idFormato: 0,
         autor: '',
         clave: ''
-    }
-
-
-
-    $scope.pageEnlaces = function(){
-        $location.path("/gestor/enlace");
-        $scope.hideMenu();
-    }
-
-    $scope.pageMateria = function(){
-        $location.path("/gestor/materia");
-        $scope.hideMenu();
-    }
-
-    $scope.pageTema = function(){
-        $location.path("/gestor/tema");
-        $scope.hideMenu();
-    }
-
-    $scope.pageCategoria = function(){
-        $location.path("/gestor/categoria");
-        $scope.hideMenu();
-    }
-
-    $scope.pageIdioma = function(){
-        $location.path("/gestor/idioma");
-        $scope.hideMenu();
-    }
-
-    $scope.pageFuente = function(){
-        $location.path("/gestor/fuente");
-        $scope.hideMenu();
-    }
-
-    $scope.pageFormato = function(){
-        $location.path("/gestor/formato");
-        $scope.hideMenu();
-    }
-
-    $scope.pageLicencia = function(){
-        $location.path("/gestor/licencia");
-        $scope.hideMenu();
-    }
-
-
-    $scope.showMenu = function () {
-        $(".menu-wrap").css('display','block');
-        $(".vertical-menu").animate({
-            marginLeft: '0px'
-        }, 500);
-    }
-
-    $scope.hideMenu = function () {
-        $(".vertical-menu").animate({
-            marginLeft: '-280px'
-        }, 500);
-        setTimeout(function() {
-            $(".menu-wrap").fadeOut();
-        }, 500);
-    }
-
-    $scope.hideMenuParent = function(e){
-        if (!e.target.classList.contains('menu-wrap'))
-            return;  
-        $scope.hideMenu();
     }
 
     $scope.init = function() {
@@ -175,5 +109,5 @@ app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function(
 
         }
     
-    }
+    }	
 }]);

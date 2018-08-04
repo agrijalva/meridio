@@ -92,6 +92,70 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         templateUrl: "pages/perfil/templates/verPerfil.html",
         controller: "PerfilCtrl"
     })
+
+    .state("enlace", {
+        url: "/enlace",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/enlaces/gesEnlace.html",
+        controller: "gesEnlaceCtrl"
+    })
+
+    .state("materia", {
+        url: "/materia",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/materia/gesMateria.html",
+        controller: "gesMateriaCtrl"
+    })
+
+    .state("tema", {
+        url: "/tema",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/tema/gesTema.html",
+        controller: "gesTemaCtrl"
+    })
+
+    .state("categoria", {
+        url: "/categoria",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/categoria/gesCategoria.html",
+        controller: "gesCategoriaCtrl"
+    })
+
+    .state("idioma", {
+        url: "/idioma",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/idioma/gesIdioma.html",
+        controller: "gesIdiomaCtrl"
+    })
+
+    .state("fuente", {
+        url: "/fuente",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/fuente/gesFuente.html",
+        controller: "gesFuenteCtrl"
+    })
+
+    .state("formato", {
+        url: "/formato",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/formato/gesFormato.html",
+        controller: "gesFormatoCtrl"
+    })
+
+    .state("licencia", {
+        url: "/licencia",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/licencia/gesLicencia.html",
+        controller: "gesLicenciaCtrl"
+    })
 }]);
 
 var Authorization = 'eb60959f5eac3e1d081244c33d4fb850';

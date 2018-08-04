@@ -1,5 +1,5 @@
 <div class=dashboard-page>
-    <div class="header-admin">
+    <div class="header-admin" style="background-color: #000 !important;">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -10,9 +10,6 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="panel-perfil pull-right">
-                        <button class="btn btn-link bth-header" ng-click="pnlNoticias();"> Enlaces </button>
-                        <button class="btn btn-link bth-header" ng-click="pnlConocenos();"> Conocenos </button>
-                        <button class="btn btn-link bth-header" ng-click="pnlAyuda();"> Ayuda </button>
                         <img src="images/logo_tec_blanco.png" width="80">
                         <!-- <div class="per-nombre">Alejandro Grijalva Antonio</div> -->
                     </div>
@@ -35,44 +32,49 @@
             </div>
             <div class="nav-content">
                 <ul class="nav">
-                    <li ng-click="pnlNoticias()">
+                    <li ng-click="pageEnlaces()">
                         <table width="100%" border="0">
-                            <tr>
-                                <!-- <td width="25"><i class="fa fa-newspaper-o" aria-hidden="true"></i></td> -->
-                                <td>Enlaces</td>
-                            </tr>
+                            <tr> <td>Enlaces</td> </tr>
                         </table>
                     </li>
-                    <li ng-click="pnlConocenos()">
+                    <li ng-click="pageMateria()">
                         <table width="100%" border="0">
-                            <tr>
-                                <!-- <td width="25"><i class="fa fa-user-circle-o" aria-hidden="true"></i></td> -->
-                                <td>Conócenos</td>
-                            </tr>
+                            <tr> <td>Materia</td> </tr>
                         </table>
                     </li>
-                    <li ng-click="pnlFavoritos()">
+                    <li ng-click="pageTema()">
                         <table width="100%" border="0">
-                            <tr>
-                                <!-- <td width="25"><i class="fa fa-lock" aria-hidden="true"></i></td> -->
-                                <td>Mis sitios favoritos</td>
-                            </tr>
+                            <tr> <td>Tema</td> </tr>
                         </table>
                     </li>
-                    <li ng-click="pnlAyuda()">
+                    <li ng-click="pageCategoria()">
                         <table width="100%" border="0">
-                            <tr>
-                                <!-- <td width="25"><i class="fa fa-pencil" aria-hidden="true"></i></td> -->
-                                <td>Ayuda</td>
-                            </tr>
+                            <tr> <td>Categoria</td> </tr>
+                        </table>
+                    </li>
+                    <li ng-click="pageIdioma()">
+                        <table width="100%" border="0">
+                            <tr> <td>Idiomas</td> </tr>
+                        </table>
+                    </li>
+                    <li ng-click="pageFuente()">
+                        <table width="100%" border="0">
+                            <tr> <td>Fuente</td> </tr>
+                        </table>
+                    </li>
+                    <li ng-click="pageFormato()">
+                        <table width="100%" border="0">
+                            <tr> <td>Formato</td> </tr>
+                        </table>
+                    </li>
+                    <li ng-click="pageLicencia()">
+                        <table width="100%" border="0">
+                            <tr> <td>Licencia</td> </tr>
                         </table>
                     </li>
                     <li ng-click="close()">
                         <table width="100%" border="0">
-                            <tr>
-                                <!-- <td width="25"><i class="fa fa-times-circle" aria-hidden="true"></i></td> -->
-                                <td>Cerrar sesión</td>
-                            </tr>
+                            <tr> <td>Cerrar sesión</td> </tr>
                         </table>
                     </li>
                 </ul>

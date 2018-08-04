@@ -1,0 +1,140 @@
+<div ng-init="init()">
+    <div class="container">
+        <div class="pnl-perfil">
+            <div class="col-sm-12">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div ng-show="contentLinks != 0" class="panel panel-default pnl-enlaces">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">enlaces</h3>
+                            <button class="btn btn-default pull-right" style="margin-top: -30px;" ng-click="openNewLinck();">
+                                <i class="fa fa-plus"></i> Nuevo Enlace
+                            </button>
+                        </div>
+
+                        <div>
+                            <div class="panel-body" ng-repeat="enlace in Enlaces | filter: search" >
+                                <div class="col-sm-12 pnl-titulo">
+                                    <div> <img src="https://www.google.com/s2/favicons?domain={{enlace.fuente}}" width="12"> <small>{{enlace.fuente}}</small></div>
+                                    <a href="{{enlace.URL}}" target="_blank">
+                                        <b ng-bind-html="enlace.titulo"></b>
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <table>
+                                        <tr>
+                                            <td valign="top" style="padding-left: 5px;">
+                                                <div style="float: left;" ng-bind-html="enlace.descripcion"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="pnl-social">
+                                    <table width="100%" border="0">
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <br>
+                                                <button class="btn btn-success btn-xs" disabled="">Editar</button>
+                                                <button class="btn btn-danger btn-xs" disabled="">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- aqui termina -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading" style="display: none;">
+    <table width="100%" height="100%" cellspacing="0" cellpadding="0" >
+        <tr>
+            <td valign="middel" align="center">
+                <h1><img src="images/loading.gif" width="30"></h1>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalNuevaNoticia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="guardarEnlace();" name="frmEnlace" id="frmEnlace">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nueva Enlace</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label><small>Título</small></label>
+                            <input name="not_titulo" type="text" class="form-control" ng-model="datosEnlace.titulo">
+
+                            <label><small>Descripción</small></label>
+                            <textarea name="not_subtitulo" type="text" class="form-control" ng-model="datosEnlace.descripcion"></textarea>
+                            
+                            <label><small>Link</small></label>
+                            <input name="not_url" type="text" class="form-control" ng-model="datosEnlace.link">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label><small>Categoria</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idCategoria" ng-change="temaByIdCat( datosEnlace.idCategoria );">
+                                <option value="0">Selecciona</option>
+                                <option ng-repeat="item in Categorias" value="{{ item.idCategoria }}">{{item.categoria}}</option>
+                            </select>
+
+                            <label><small>Idioma</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idIdioma">
+                                <option value="0">Selecciona</option>
+                                <option ng-repeat="item in Idiomas" value="{{ item.idIdioma }}">{{item.idioma}}</option>
+                            </select>
+
+                            <label><small>Licencia</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idLicencia">
+                                <option value="0">Selecciona</option>
+                                <option ng-repeat="item in Licencia" value="{{ item.idLicencia }}">{{item.licencia}}</option>
+                            </select>
+
+                            <label><small>Autor</small></label>
+                            <input name="not_url" type="text" class="form-control" ng-model="datosEnlace.autor">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label><small>Tema</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idTema">
+                                <option value="0">Selecciona</option>
+                                <option ng-repeat="item in Temas" value="{{ item.idTema }}">{{item.tema}}</option>
+                            </select>
+
+                            <label><small>Fuente</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idFuente">
+                                <option value="0">Selecciona</option>
+                                <option ng-repeat="item in Fuente" value="{{ item.idFuente }}">{{item.fuente}}</option>
+                            </select>
+
+                            <label><small>Formato</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idFormato">
+                                <option value="0">Selecciona</option>
+                                <option ng-repeat="item in Formato" value="{{ item.idFormato }}">{{item.formato}}</option>
+                            </select>
+
+                            <label><small>Palabras clave</small></label>
+                            <input name="not_url" type="text" class="form-control" ng-model="datosEnlace.clave">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Guardar Noticia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
