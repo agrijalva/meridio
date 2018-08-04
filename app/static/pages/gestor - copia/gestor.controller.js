@@ -17,28 +17,6 @@ app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function(
         clave: ''
     }
 
-    $scope.showMenu = function () {
-        $(".menu-wrap").css('display','block');
-        $(".vertical-menu").animate({
-            marginLeft: '0px'
-        }, 500);
-    }
-
-    $scope.hideMenu = function () {
-        $(".vertical-menu").animate({
-            marginLeft: '-280px'
-        }, 500);
-        setTimeout(function() {
-            $(".menu-wrap").fadeOut();
-        }, 500);
-    }
-
-    $scope.hideMenuParent = function(e){
-        if (!e.target.classList.contains('menu-wrap'))
-            return;  
-        $scope.hideMenu();
-    }
-
     $scope.init = function() {
         noticiaFactory.enlacesTodas().then(function(response){
             $scope.Enlaces = response.data;

@@ -15,6 +15,8 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 	    }
     }
 
+    $scope.inCatego = true;
+
 	$scope.frmNoticia = {
 		idNoticia: 0,
 		not_titulo: '',
@@ -64,6 +66,14 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
         });   
     }
 
+    $scope.favoritoRemoveByFav = function( idEnlace, key ){
+        $("#enl-" + key).remove();
+        $scope.contentLinks--;
+        noticiaFactory.favoritoRemove( $scope.idUsuario, idEnlace ).then(function(response){
+            $scope.temas = response.data;
+        });   
+    }
+
     $scope.getIdiomas = function(){
         noticiaFactory.idiomas().then(function(response){
             $scope.idiomas = response.data;
@@ -91,6 +101,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             else{
                 swal("Meridio", "No se encontraron resultados");
             }
+            $scope.inCatego = false;
             $(".loading").fadeOut();
         });
     }
@@ -101,7 +112,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             $(".loading").fadeIn();
             $scope.contentLinks = response.data.length;
             if( response.data.length != 0 ){
-                $scope.Enlaces = response.data;
+                $scope.EnlacesFavoritos = response.data;
             }
             $(".loading").fadeOut();
         });
@@ -119,6 +130,21 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             $(".filters").hide();
         }
     }
+
+    $scope.viewAdd = function( idEnlace, key, fuente ){
+        if( fuente == 1 ){
+            $scope.Enlaces[ key ].vistos++;
+            window.open( $scope.Enlaces[ key ].URL );
+        }
+        else{
+            $scope.EnlacesFavoritos[ key ].vistos++;
+            window.open( $scope.EnlacesFavoritos[ key ].URL );
+        }
+        noticiaFactory.viewAdd( $scope.idUsuario, idEnlace ).then(function(response){
+            $scope.temas = response.data;
+            // location.href = $scope.EnlacesFavoritos[ key ].URL
+        });   
+    }    
 
     $scope.keyEnter = function( event ){
         if( event.keyCode == 13 )

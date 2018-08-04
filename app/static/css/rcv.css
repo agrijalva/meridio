@@ -72,7 +72,7 @@
 }
 
 .pnl-perfil{
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	/*margin-left: 100px;*/
 	/*font-size: 14px;*/
 }
@@ -368,4 +368,59 @@
 
 .filtros-control small:hover{
 	color: blue;
+}
+
+.catego-item{
+	height: 130px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	box-shadow: 1px;
+	background-position: center center;
+	background-size: cover;
+}
+
+.catego-item img{
+	position: absolute;
+	/*margin-top: -25%; */
+}
+
+.catego-item .hover{
+	background-color: rgba(0,0,0,0.4);
+	width: 100%;
+	height: 100%;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	font-weight: bold;
+	padding-top: 60px;
+	cursor: pointer;
+}
+
+.catego-item .hover:hover{
+	background-color: rgba(0,0,0,0.8);
+	-webkit-transition: background 0.5s, -webkit-transform 0.5s;
+    transition: background 0.5s, transform 0.5s;
+}
+
+.busquedaGeneral{
+	background-color: transparent;
+	border:none;
+	width: 200px;
+	color: #333;
+	margin-left: 5px;
+}
+
+.pnl-search-o{
+	border-radius: 3px;
+	border: 1px solid #999;
+	padding: 7px;
+}
+
+.pnl-search-o input{
+	background-color: transparent;
+	border:none;
+	width: 90%;
+	color: #333;
+	margin-left: 5px;
 }

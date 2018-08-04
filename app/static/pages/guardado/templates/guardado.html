@@ -23,31 +23,77 @@
 
 	    			<div class="col-sm-3"></div>
 	    			<div class="col-sm-6">
-			    		<div ng-show="Noticias.success" class="panel panel-default pnl-enlaces">		
+			    		<div ng-show="contentLinks != 0" class="panel panel-default pnl-enlaces">		
 							<div class="panel-heading">
 						    	<h3 class="panel-title">mis favoritos</h3>
 						  	</div>
 
-						  	<div fav-feed></div>
-
-						  	<div class="panel-body" ng-repeat="not in Noticias.data | filter: search | startFrom:currentPage*pageSize | limitTo:pageSize">
-								<div class="col-sm-12">
-						    		<b ng-bind-html="not.not_titulo"></b>
-						    	</div>
-						  		
-						    	<div class="col-sm-12">
-						    		<!-- <b ng-bind-html="not.not_subtitulo"></b> -->
-						    	</div>
-						    	<div class="col-sm-7" ng-bind-html="not.not_contenido">
-						    	
-						    	</div>
-							    <div class="col-sm-5">
-						    		<img src="{{not.not_imagen}}" width="100%">
-
-						    		<button class="btn pull-right btn-danger btn-cancelar" ng-click="eliminar(not.idNoticia);">Eliminar</button>
-						    		<button class="btn pull-right btn-info btn-guardar" ng-click="openEditNews(not);">Editar</button>
+						  	<div class="panel-body" ng-repeat="( key, enlace ) in EnlacesFavoritos | filter: search"  id="enl-{{key}}">
+								<div class="col-sm-12 pnl-titulo">
+									<div> <img src="https://www.google.com/s2/favicons?domain={{enlace.fuente}}" width="12"> <small>{{enlace.fuente}}</small></div>
+									<a href="" target="_blank" ng-click="viewAdd( enlace.idEnlace, key, 2 )">
+										<b ng-bind-html="enlace.titulo"></b>
+									</a>
+									<a href="{{enlace.URL}}" target="_blank" id="link-{{key}}">Link</a>
+								</div>
+								
+							    <div class="col-sm-12">
+							    	<table>
+							    		<tr>
+							    			<td valign="top">
+							    				<!-- Imagen si la fuente es YouTube -->
+							    				<a href="" target="_blank" ng-click="viewAdd( enlace.idEnlace, key, 2 )">
+								    				<img ng-show = "enlace.idFuente == 1" src="https://img.youtube.com/vi/{{enlace.URL.split('/').pop()}}/default.jpg" width="100" style="border-radius: 5px;">
+								    			</a>
+							    			</td>
+							    			<td valign="top" style="padding-left: 5px;">
+							    				<div style="float: left;" ng-bind-html="enlace.descripcion"></div>
+										    	<div class="data-text" style="display: none;">
+										    		<div>
+										    			<b>Campo 2</b> <span>{{enlace.URL.split('/').pop()}}</span>
+										    		</div>
+										    		<div>
+										    			<b>Campo 2</b> <span>Valor 1</span>
+										    		</div>
+										    		<div>
+										    			<b>Campo 2</b> <span>Valor 1</span>
+										    		</div>
+										    		<div>
+										    			<b>Campo 2</b> <span>Valor 1</span>
+										    		</div>
+										    		<div>
+										    			<b>Campo 2</b> <span>Valor 1</span>
+										    		</div>
+										    		<div>
+										    			<b>Campo 2</b> <span>Valor 1</span>
+										    		</div>
+										    		<div>
+										    			<b>Campo 2</b> <span>Valor 1</span>
+										    		</div>
+										    	</div>
+							    			</td>
+							    		</tr>
+							    	</table>
 							    </div>
-						  	</div>
+							    <div class="pnl-social">
+							    	<table width="100%" border="0">
+							    		<tr>
+							    			<td width="40" align="center">
+												<i class="fa fa-eye ico-social" aria-hidden="true"></i>
+											</td>
+							    			<td width="50">{{enlace.vistos}}</td>
+
+							    			<td></td>
+							    			
+											<td width="40">
+												<i ng-show="enlace.guardado == 0" class="fa fa-star-o ico-social" style="cursor: pointer;" aria-hidden="true" ng-click="favoritoAdd( enlace.idEnlace, key );"></i>
+
+												<i ng-show="enlace.guardado != 0" class="fa fa-star ico-social" style="cursor: pointer;" aria-hidden="true" ng-click="favoritoRemoveByFav( enlace.idEnlace, key );"></i>
+											</td>
+							    		</tr>
+							    	</table>
+							    </div>
+							</div>
 
 						  	
 	    				</div>
@@ -77,7 +123,7 @@
     				</div> -->
 				</div>
 
-	    		<div ng-show="!Noticias.success">
+	    		<div ng-show="contentLinks == 0">
 	    			<center>
 	    				<br><br><br><br>
 	    				<i class="fa fa-newspaper-o" aria-hidden="true" style="font-size: 100px; color: #eee;"></i>

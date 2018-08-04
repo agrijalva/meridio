@@ -32,6 +32,20 @@ app.factory( 'noticiaFactory', function( $http ){
             });
         },
 
+        viewAdd: function( idUsuario, idEnlace ) {
+            return $http({
+                url: Path_Actividad + 'viewAdd/',
+                method: "GET",
+                params: {
+                    idUsuario: idUsuario,
+                    idEnlace: idEnlace
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
         favoritoAdd: function( idUsuario, idEnlace ) {
             return $http({
                 url: Path_Actividad + 'favoritoAdd/',
