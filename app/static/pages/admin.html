@@ -11,7 +11,7 @@
 	        	<div class="col-sm-6">
 	        		<div class="panel-perfil pull-right">
 	        			<button class="btn btn-link bth-header" ng-click="pnlNoticias();"> Enlaces </button>
-	        			<button class="btn btn-link bth-header" ng-click="pnlConocenos();"> Conocenos </button>
+	        			<button class="btn btn-link bth-header" ng-click="pnlConocenos();"> Conócenos </button>
 	        			<button class="btn btn-link bth-header" ng-click="pnlAyuda();"> Ayuda </button>
 	        			<img src="images/logo_tec_blanco.png" width="80">
 	        			<!-- <div class="per-nombre">Alejandro Grijalva Antonio</div> -->
@@ -35,6 +35,17 @@
 		    </div>
 		    <div class="nav-content">
 		    	<ul class="nav">
+		    		<a href="/#/gestor/enlace" target="_blank" style="border-radius: 0px">
+						<li style="background-color: #f4b942; margin-top: 0px; border-radius: 0px">
+							<table width="100%" border="0">
+								<tr>
+									<td width="25"><i class="fa fa-sliders" aria-hidden="true"></i></td>
+									<td>Gestor</td>
+								</tr>
+							</table>
+						</li>
+					</a>
+
 					<li ng-click="pnlNoticias()">
 						<table width="100%" border="0">
 							<tr>
@@ -67,6 +78,7 @@
 							</tr>
 						</table>
 					</li>
+
 					<li ng-click="close()">
 						<table width="100%" border="0">
 							<tr>
