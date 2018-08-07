@@ -10,7 +10,7 @@
 							<i class="fa fa-search"></i>
 							<input type="" name="" class="busquedaGeneral" placeholder="Escribe algo" ng-model="busquedaGeneral" ng-keyup="keyEnter($event)">
 
-							<i class="fa fa-filter pointer" aria-hidden="true" ng-click="inCatego = false"></i>
+							<i class="fa fa-filter pointer" aria-hidden="true" ng-click="inCatego = false" style="padding:10px 8px; "></i>
 						</div> <br>
 
 	    				<div ng-show="idCategoria == 0" ng-repeat="(key, cat) in categorias" class="catego-item" style="background-image: url(images/categorias/{{cat.imagen}})">
@@ -55,17 +55,22 @@
 
 							<div class="no-resultados">
 								<span class="panel-title">{{ contentLinks }}</span><small><i>Resultado</i><i ng-hide="contentLinks == 1">s</i></small>
+								<div class="pull-right" ng-hide="contentLinks == 0">
+									<a href="" ng-click="busquedaGeneral == '';inCatego = true">
+										<i class="fa fa-undo text-info" aria-hidden="true" style="font-size: 20px; margin-top: 10px;"></i>
+									</a>
+								</div>
 							</div>
 							<br>
 
-							<div class="text-center filtros-control more-filter" ng-click="filtrosControl(1)"><small>Más filtros<br></small>﹀</div>
+							<div class="text-center filtros-control more-filter" ng-click="filtrosControl(1)"><small>Búsqueda Avanzada<br></small>﹀</div>
 
 
-							<div style="display: block;" class="filters">
+							<div style="display: none;" class="filters">
 								<label><small>Materia</small></label>
-								<select class="form-control-search" ng-change="temaByIdMat( busqueda.idCategoria )" ng-model="busqueda.idCategoria">
+								<select class="form-control-search" ng-change="temaByIdMat( busqueda.idMateria )" ng-model="busqueda.idMateria">
 									<option value="0" selected="">Todas</option>
-									<option ng-repeat="(key, mat) in materias" value="{{cat.idMateria}}">{{ cat.categoria }}</option>
+									<option ng-repeat="(key, mat) in materias" value="{{mat.idMateria}}">{{ mat.materia }}</option>
 								</select>
 
 								<label><small>Tema</small></label>
@@ -75,7 +80,7 @@
 								</select>
 								
 								<label><small>Categoría</small></label>
-								<select class="form-control-search" ng-change="temaByIdCat( busqueda.idCategoria )" ng-model="busqueda.idCategoria">
+								<select class="form-control-search" ng-model="busqueda.idCategoria">
 									<option value="0" selected="">Todas</option>
 									<option ng-repeat="(key, cat) in categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
 								</select>
@@ -95,7 +100,7 @@
 									<option ng-repeat="(key, idi) in idiomas" value="{{idi.idIdioma}}">{{ idi.idioma }}</option>
 								</select>
 
-								<div class="text-center filtros-control" ng-click="filtrosControl(2)"> ︿<small><br>Menos filtros</small> </div>
+								<div class="text-center filtros-control" ng-click="filtrosControl(2)"> ︿<small><br>Mostrar menos</small> </div>
 							</div>
 
 							<button class="btn btn-success btn-sm btn-buscar" ng-click="enlacesTodas()">Buscar</button>

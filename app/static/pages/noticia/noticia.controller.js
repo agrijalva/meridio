@@ -15,8 +15,8 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
         }
     }
 
-    $scope.inCatego = false;
-    $scope.filtros = 1;
+    $scope.inCatego = true;
+    $scope.filtros = 2;
 
     $scope.categoria = [];
     $scope.idCategoria = 0;
@@ -33,6 +33,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     $scope.busqueda = {
         idUsuario: 1,
         idCategoria: 0,
+        idMateria: 0,
         idTema: 0,
         titulo: '',
         descripcion: '',
@@ -65,14 +66,12 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 
     $scope.favoritoAdd = function( idEnlace, key ){
         noticiaFactory.favoritoAdd( $scope.idUsuario, idEnlace ).then(function(response){
-            $scope.temas = response.data;
             $scope.Enlaces[ key ].guardado = 1;
         });   
     }
 
     $scope.favoritoRemove = function( idEnlace, key ){
         noticiaFactory.favoritoRemove( $scope.idUsuario, idEnlace ).then(function(response){
-            $scope.temas = response.data;
             $scope.Enlaces[ key ].guardado = 0;
         });   
     }
@@ -80,9 +79,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     $scope.favoritoRemoveByFav = function( idEnlace, key ){
         $("#enl-" + key).fadeOut();
         $scope.contentLinks--;
-        noticiaFactory.favoritoRemove( $scope.idUsuario, idEnlace ).then(function(response){
-            $scope.temas = response.data;
-        });   
+        noticiaFactory.favoritoRemove( $scope.idUsuario, idEnlace ).then(function(response){});   
     }
 
     $scope.getIdiomas = function(){
@@ -235,6 +232,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     $scope.init = function(){
         $scope.getCategorias();
         $scope.getIdiomas();
+        $scope.getMaterias();
         // noticiaFactory.todas().then(function(response){
         //  $scope.Noticias = response.data;
         //  // $scope.data = $scope.Noticias.data

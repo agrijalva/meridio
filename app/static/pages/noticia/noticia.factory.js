@@ -133,12 +133,12 @@ app.factory( 'noticiaFactory', function( $http ){
 
 
 
-        temaByIdMat: function(idCategoria) {
+        temaByIdMat: function(idMateria) {
             return $http({
                 url: Path_Tema + 'temaByIdMat/',
                 method: "GET",
                 params: {
-                    idCategoria: idCategoria
+                    idMateria: idMateria
                 },
                 headers: {
                     'Content-Type': 'application/json'
