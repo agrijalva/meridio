@@ -1,16 +1,16 @@
-var TemaView = require('../views/reference'),
-    TemaModel = require('../models/dataAccess'),
+var MateriaView = require('../views/reference'),
+    MateriaModel = require('../models/dataAccess'),
     moment = require('moment');
 var phantom = require('phantom');
 var path = require('path');
 var webPage = require('webpage');
 var request = require('request');
 
-var Tema = function (conf) {
+var Materia = function (conf) {
     this.conf = conf || {};
 
-    this.view = new TemaView();
-    this.model = new TemaModel({
+    this.view = new MateriaView();
+    this.model = new MateriaModel({
         parameters: this.conf.parameters
     });
 
@@ -20,14 +20,13 @@ var Tema = function (conf) {
 };
 
 
-Tema.prototype.get_temaByIdMat = function (req, res, next) {
+Materia.prototype.get_materias = function (req, res, next) {
     var self = this;
     var params = [];
 
     var params = [
-        { name: 'idMateria', value: req.query.idMateria, type: self.model.types.INT },
     ];
-    this.model.query('TEM_TEMAPORIDMATERIA_SP', params, function (error, result) {
+    this.model.query('MAT_GETMATERIAS_SP', params, function (error, result) {
         self.view.expositor(res, {
             error: error,
             result: result
@@ -36,4 +35,4 @@ Tema.prototype.get_temaByIdMat = function (req, res, next) {
 };
 
 
-module.exports = Tema;
+module.exports = Materia;
