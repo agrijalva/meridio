@@ -8,6 +8,7 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
         link: '',
         idCategoria: 0,
         idTema: 0,
+        idMateria: 0,
         idIdioma: 0,
         idFuente: 0,
         idLicencia: 0,
@@ -49,13 +50,21 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
         noticiaFactory.categorias().then(function(response){
             $scope.Categorias = response.data;
         });
+
+        $scope.getMaterias();
     }
 
-    $scope.temaByIdCat = function( idCategoria ){
-        noticiaFactory.temaByIdCat( idCategoria ).then(function(response){
-            $scope.Temas = response.data;
-            if( $scope.Temas.length == 0 )
-                $scope.datosEnlace.idTema = 0;
+    $scope.temaByIdMat = function( idMateria ){
+        noticiaFactory.temaByIdMat( idMateria ).then(function(response){
+            $scope.temas = response.data;
+            // if( $scope.temas.length == 0 )
+            $scope.datosEnlace.idTema = 0;
+        });
+    }
+
+    $scope.getMaterias = function(){
+        noticiaFactory.getMaterias().then(function(response){
+            $scope.materias = response.data;
         });
     }
 
@@ -88,12 +97,12 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
         else if($scope.datosEnlace.idFormato ==  0){
             swal("Meridio", "Falta especificar el campo: formato");
         }
-        else if($scope.datosEnlace.autor ==  ''){
-            swal("Meridio", "Falta especificar el campo: autor");
-        }
-        else if($scope.datosEnlace.clave ==  ''){
-            swal("Meridio", "Falta especificar el campo: clave");
-        }
+        // else if($scope.datosEnlace.autor ==  ''){
+        //     swal("Meridio", "Falta especificar el campo: autor");
+        // }
+        // else if($scope.datosEnlace.clave ==  ''){
+        //     swal("Meridio", "Falta especificar el campo: clave");
+        // }
         else{
             noticiaFactory.nuevoEnlace( $scope.datosEnlace ).then(function(response){
                 $scope.resultado = response.data;

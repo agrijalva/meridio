@@ -68,7 +68,7 @@
             <form ng-submit="guardarEnlace();" name="frmEnlace" id="frmEnlace">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Nueva Enlace</h4>
+                    <h4 class="modal-title" id="myModalLabel">Nuevo Enlace</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -84,10 +84,20 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <label><small>Categoria</small></label>
-                            <select class="form-control" ng-model="datosEnlace.idCategoria" ng-change="temaByIdCat( datosEnlace.idCategoria );">
+                            <label><small>Materia</small></label>
+                            <select class="form-control" ng-change="temaByIdMat( datosEnlace.idMateria )" ng-model="datosEnlace.idMateria">
+                                <option value="0" selected="">Seleccione</option>
+                                <option ng-repeat="(key, mat) in materias" value="{{mat.idMateria}}">{{ mat.materia }}</option>
+                            </select>
+                            <!-- <select class="form-control" ng-model="datosEnlace.idCategoria" ng-change="temaByIdCat( datosEnlace.idCategoria );">
                                 <option value="0">Selecciona</option>
                                 <option ng-repeat="item in Categorias" value="{{ item.idCategoria }}">{{item.categoria}}</option>
+                            </select> -->
+
+                            <label><small>Categoría</small></label>
+                            <select class="form-control" ng-model="datosEnlace.idCategoria">
+                                <option value="0" selected="">Seleccione</option>
+                                <option ng-repeat="(key, cat) in Categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
                             </select>
 
                             <label><small>Idioma</small></label>
@@ -102,6 +112,7 @@
                                 <option ng-repeat="item in Licencia" value="{{ item.idLicencia }}">{{item.licencia}}</option>
                             </select>
 
+
                             <label><small>Autor</small></label>
                             <input name="not_url" type="text" class="form-control" ng-model="datosEnlace.autor">
                         </div>
@@ -110,7 +121,7 @@
                             <label><small>Tema</small></label>
                             <select class="form-control" ng-model="datosEnlace.idTema">
                                 <option value="0">Selecciona</option>
-                                <option ng-repeat="item in Temas" value="{{ item.idTema }}">{{item.tema}}</option>
+                                <option ng-repeat="item in temas" value="{{ item.idTema }}">{{item.tema}}</option>
                             </select>
 
                             <label><small>Fuente</small></label>
@@ -132,7 +143,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-info">Guardar Noticia</button>
+                    <button type="submit" class="btn btn-info">Guardar Enlace</button>
                 </div>
             </form>
         </div>
