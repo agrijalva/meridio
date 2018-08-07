@@ -1,30 +1,34 @@
 app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","noticiaFactory", function($scope, $sce, $location, filterFilter, noticiaFactory ) {
-    // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
+    // $scope.DataUser      = JSON.parse( localStorage.getItem("RCVUserData") );
     $scope.editorOptions = {
-	    // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
-	};
+        // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
+    };
 
-	$scope.currentPage = 0;
+    $scope.currentPage = 0;
     $scope.contentLinks = 0;
     $scope.pageSize = 10;
     $scope.Noticias = [];
     $scope.idUsuario = 1;
     $scope.numberOfPages=function(){
-    	if( $scope.Noticias.success ){
-	        return Math.ceil($scope.Noticias.data.length/$scope.pageSize);
-	    }
+        if( $scope.Noticias.success ){
+            return Math.ceil($scope.Noticias.data.length/$scope.pageSize);
+        }
     }
 
-    $scope.inCatego = true;
+    $scope.inCatego = false;
+    $scope.filtros = 1;
 
-	$scope.frmNoticia = {
-		idNoticia: 0,
-		not_titulo: '',
-		not_subtitulo: '',
-		not_contenido: '',
-		not_url: '',
-		not_imagen: ''
-	}
+    $scope.categoria = [];
+    $scope.idCategoria = 0;
+
+    $scope.frmNoticia = {
+        idNoticia: 0,
+        not_titulo: '',
+        not_subtitulo: '',
+        not_contenido: '',
+        not_url: '',
+        not_imagen: ''
+    }
 
     $scope.busqueda = {
         idUsuario: 1,
@@ -44,12 +48,19 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
         });
     }
 
-    $scope.temaByIdCat = function( idCategoria ){
-        noticiaFactory.temaByIdCat( idCategoria ).then(function(response){
+    $scope.temaByIdMat = function( idMateria ){
+        noticiaFactory.temaByIdMat( idMateria ).then(function(response){
             $scope.temas = response.data;
             if( $scope.temas.length == 0 )
                 $scope.busqueda.idTema = 0;
         });
+    }
+
+    $scope.selectCategoria  = function( indice ){
+        $scope.categoria    = $scope.categorias[ indice ];
+        $scope.idCategoria  = $scope.categoria.idCategoria;
+        $(".busquedaGeneral ").focus();
+        $scope.filtros = 2;
     }
 
     $scope.favoritoAdd = function( idEnlace, key ){
@@ -67,7 +78,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     }
 
     $scope.favoritoRemoveByFav = function( idEnlace, key ){
-        $("#enl-" + key).remove();
+        $("#enl-" + key).fadeOut();
         $scope.contentLinks--;
         noticiaFactory.favoritoRemove( $scope.idUsuario, idEnlace ).then(function(response){
             $scope.temas = response.data;
@@ -77,6 +88,12 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     $scope.getIdiomas = function(){
         noticiaFactory.idiomas().then(function(response){
             $scope.idiomas = response.data;
+        });
+    }
+
+    $scope.getMaterias = function(){
+        noticiaFactory.getMaterias().then(function(response){
+            $scope.materias = response.data;
         });
     }
 
@@ -91,6 +108,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             }
             $scope.busqueda.titulo = $scope.busquedaGeneral;
             $scope.busqueda.descripcion = $scope.busquedaGeneral;
+            $scope.busqueda.idCategoria = $scope.idCategoria;
         }
 
         noticiaFactory.busquedaEnlaces( $scope.busqueda ).then(function(response){
@@ -152,16 +170,16 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
     }
 
     $scope.openNewNews = function(){
-    	$scope.frmNoticia = {
-			idNoticia: 0,
-			not_titulo: '',
-			not_subtitulo: '',
-			not_contenido: '',
-			not_url: '',
-			not_imagen: ''
-		}
-		document.getElementById("frmNoticia").reset();
-    	$("#modalNuevaNoticia").modal("show");
+        $scope.frmNoticia = {
+            idNoticia: 0,
+            not_titulo: '',
+            not_subtitulo: '',
+            not_contenido: '',
+            not_url: '',
+            not_imagen: ''
+        }
+        document.getElementById("frmNoticia").reset();
+        $("#modalNuevaNoticia").modal("show");
     }
 
     $scope.openEditNews = function( item ){
@@ -175,57 +193,57 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
         //     });
 
         console.log( "not_titulo", aux );
-    	$scope.frmNoticia = {
-			idNoticia: item.idNoticia,
-			not_titulo: htmlentities.decode(item.not_titulo),
-			not_subtitulo: item.not_subtitulo,
-			not_contenido: item.not_contenido,
-			not_url: item.not_url,
-			not_imagen: item.not_imagen
-		}
-		// document.getElementById("frmNoticiaEditar").reset();
-    	$("#modalEditarNoticia").modal("show");
+        $scope.frmNoticia = {
+            idNoticia: item.idNoticia,
+            not_titulo: htmlentities.decode(item.not_titulo),
+            not_subtitulo: item.not_subtitulo,
+            not_contenido: item.not_contenido,
+            not_url: item.not_url,
+            not_imagen: item.not_imagen
+        }
+        // document.getElementById("frmNoticiaEditar").reset();
+        $("#modalEditarNoticia").modal("show");
     }
 
     $scope.guardarNoticia = function(){
-    	noticiaFactory.guardaNoticia( $scope.frmNoticia.not_contenido ).then(function(response){
-    		console.log("response", response);
-    		if( response.data.success ){
-    			swal("Noticias", "Noticia guardada correctamente." );
-    			$scope.init();
-    			$("#modalNuevaNoticia").modal("hide");
-    		}
-    		else{
-    			swal("Noticias", response.data.msg );
-    		}
-    	});
+        noticiaFactory.guardaNoticia( $scope.frmNoticia.not_contenido ).then(function(response){
+            console.log("response", response);
+            if( response.data.success ){
+                swal("Noticias", "Noticia guardada correctamente." );
+                $scope.init();
+                $("#modalNuevaNoticia").modal("hide");
+            }
+            else{
+                swal("Noticias", response.data.msg );
+            }
+        });
     }
 
     $scope.editarNoticia = function(){
-    	noticiaFactory.editarNoticia( $scope.frmNoticia ).then(function(response){
-    		if( response.data.success ){
-    			swal("Noticias", "Noticia guardada correctamente." );
-    			$scope.init();
-    			$("#modalEditarNoticia").modal("hide");
-    		}
-    		else{
-    			swal("Noticias", response.data.msg );
-    		}
-    	});
+        noticiaFactory.editarNoticia( $scope.frmNoticia ).then(function(response){
+            if( response.data.success ){
+                swal("Noticias", "Noticia guardada correctamente." );
+                $scope.init();
+                $("#modalEditarNoticia").modal("hide");
+            }
+            else{
+                swal("Noticias", response.data.msg );
+            }
+        });
     }
 
     $scope.init = function(){
         $scope.getCategorias();
         $scope.getIdiomas();
-    	// noticiaFactory.todas().then(function(response){
-    	// 	$scope.Noticias = response.data;
-    	// 	// $scope.data = $scope.Noticias.data
-    	// 	console.log("Noticias", $scope.Noticias);
-    	// });
+        // noticiaFactory.todas().then(function(response){
+        //  $scope.Noticias = response.data;
+        //  // $scope.data = $scope.Noticias.data
+        //  console.log("Noticias", $scope.Noticias);
+        // });
     }
 
     $scope.eliminar = function( idNoticia ){
-    	swal({
+        swal({
             title: 'Noticias',
             text: "¿Realmente quiere eliminar esta noticia.?",
             showCancelButton: true,
@@ -236,29 +254,29 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
             closeOnConfirm: false
         },
         function(){
-        	noticiaFactory.eliminar( idNoticia ).then(function(response){
-	    		$scope.init();
-	    		if( response.data.success ){
-                	swal("Caluladora", "Noticia eliminada correctamente");
-	    		}
-	    		else{
-	    			swal("Caluladora", "No se ha podido eliminar esta noticia.");
-	    		}
-	    	});
-        });    	
+            noticiaFactory.eliminar( idNoticia ).then(function(response){
+                $scope.init();
+                if( response.data.success ){
+                    swal("Caluladora", "Noticia eliminada correctamente");
+                }
+                else{
+                    swal("Caluladora", "No se ha podido eliminar esta noticia.");
+                }
+            });
+        });     
     }
 
     // Editor options.
-  	$scope.options = {
-	    language: 'es',
-	    allowedContent: true,
-	    entities: false
-  	};
+    $scope.options = {
+        language: 'es',
+        allowedContent: true,
+        entities: false
+    };
 
-  	// Called when the editor is completely ready.
-  	$scope.onReady = function () {
-	    console.log( "content", $scope.content );
-  	};
+    // Called when the editor is completely ready.
+    $scope.onReady = function () {
+        console.log( "content", $scope.content );
+    };
 }]);
 
 (function(window){

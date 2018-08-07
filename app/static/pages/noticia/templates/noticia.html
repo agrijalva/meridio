@@ -3,24 +3,30 @@
     	<div class="pnl-perfil">
     		<div class="col-sm-12" ng-show="inCatego">
     			<div class="row">
-	    			<div class="col-sm-3">
-	    				
-	    			</div>
+	    			<div class="col-sm-3"> </div>
 
-	    			<div class="col-sm-6">
-	    				<!-- {{categorias}} -->
-	    				<!-- <img src="https://pbs.twimg.com/profile_images/560964888923615232/ZyxyruCW.jpeg" width="100%"> -->
-	    				<!-- <input type="text" class=""> -->
+	    			<div class="col-sm-6"> 
 	    				<div class="pnl-search-o">
 							<i class="fa fa-search"></i>
 							<input type="" name="" class="busquedaGeneral" placeholder="Escribe algo" ng-model="busquedaGeneral" ng-keyup="keyEnter($event)">
+
+							<i class="fa fa-filter pointer" aria-hidden="true" ng-click="inCatego = false"></i>
 						</div> <br>
 
-	    				<div ng-repeat="(key, cat) in categorias" class="catego-item" style="background-image: url(images/categorias/{{cat.imagen}})">
-	    					<div class="hover">
-	    						{{cat.categoria}}
-	    					</div>
+	    				<div ng-show="idCategoria == 0" ng-repeat="(key, cat) in categorias" class="catego-item" style="background-image: url(images/categorias/{{cat.imagen}})">
+	    					<div class="hover" ng-click="selectCategoria(key)"> {{cat.categoria}} </div>
 	    				</div>
+
+	    				<div ng-show="idCategoria != 0" style="text-align: center;">
+	    					<div style="width: 150px; height: 150px; overflow: hidden; border-radius: 90px; margin: 0 auto;">
+		    					<img src="images/categorias/{{ categoria.imagen }}" height="150">
+		    				</div>
+		    				<h4>{{categoria.categoria}}</h4>
+
+		    				<br><br>
+		    				<a href="" ng-click="idCategoria = 0"> Regresar a categorias </a>
+	    				</div>
+	    				
 	    			</div>
 	    		</div>
 	    	</div>
@@ -48,24 +54,30 @@
 							</div>
 
 							<div class="no-resultados">
-								<span class="panel-title">{{ contentLinks }}</span><small><i>Resultado</i><i ng-hide="contentLinks == 1">s<i/></small>
+								<span class="panel-title">{{ contentLinks }}</span><small><i>Resultado</i><i ng-hide="contentLinks == 1">s</i></small>
 							</div>
 							<br>
 
 							<div class="text-center filtros-control more-filter" ng-click="filtrosControl(1)"><small>Más filtros<br></small>﹀</div>
 
 
-							<div style="display: none;" class="filters">
-								<label><small>Categoría</small></label>
-								<select class="form-control-search" ng-change="temaByIdCat( busqueda.idCategoria )" ng-model="busqueda.idCategoria">
+							<div style="display: block;" class="filters">
+								<label><small>Materia</small></label>
+								<select class="form-control-search" ng-change="temaByIdMat( busqueda.idCategoria )" ng-model="busqueda.idCategoria">
 									<option value="0" selected="">Todas</option>
-									<option ng-repeat="(key, cat) in categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
+									<option ng-repeat="(key, mat) in materias" value="{{cat.idMateria}}">{{ cat.categoria }}</option>
 								</select>
 
 								<label><small>Tema</small></label>
 								<select class="form-control-search" ng-model="busqueda.idTema">
 									<option value="0" selected="">Todas</option>
 									<option ng-repeat="(key, tem) in temas" value="{{tem.idTema}}">{{ tem.tema }}</option>
+								</select>
+								
+								<label><small>Categoría</small></label>
+								<select class="form-control-search" ng-change="temaByIdCat( busqueda.idCategoria )" ng-model="busqueda.idCategoria">
+									<option value="0" selected="">Todas</option>
+									<option ng-repeat="(key, cat) in categorias" value="{{cat.idCategoria}}">{{ cat.categoria }}</option>
 								</select>
 
 								<label><small>Título</small></label>
@@ -183,14 +195,16 @@
 				    			<center>
 				    				<br><br><br><br>
 				    				<i class="fa fa-flag" aria-hidden="true" style="font-size: 100px; color: #eee;"></i>
-				    				<p><small>Introduce tus parametros de búsqueda</small></p>
+				    				<p>
+				    					<small>Introduce tus parametros de búsqueda</small>
+				    					<br>
+				    					<small><a href="" ng-click="inCatego = true">Regresar a categorias</a></small>
+				    				</p>
 				    			</center>
 				    		</div>
 						</div>
     				</div>
 				</div>
-
-				
     		</div>
 
     		<div class="col-sm-12 hidden" >
