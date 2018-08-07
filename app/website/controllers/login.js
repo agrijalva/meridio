@@ -20,6 +20,22 @@ var Login = function(conf) {
     };
 };
 
+Login.prototype.get_login = function(req, res, next) {
+
+    var self = this;
+
+    var params = [
+        { name: 'usuario', value: req.query.usuario, type: self.model.types.STRING },
+        { name: 'pass', value: req.query.pass, type: self.model.types.STRING }
+    ];
+    console.log( 'params', params );
+    this.model.query('USU_LOGIN_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
 
 Login.prototype.get_permisos = function(req, res, next) {
 

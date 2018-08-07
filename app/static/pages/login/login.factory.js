@@ -1,13 +1,13 @@
-var Path_Login = API_Path + '/usuario/';
+var Path_Login = API_Path + '/login/';
 
 app.factory( 'loginFactory', function( $http ){
 	return {
-        login: function( user, pass ) {
+        login: function( usuario, pass ) {
             return $http({
                 url: Path_Login + 'login/',
-                method: "POST",
+                method: "GET",
                 params: {
-                    user: user,
+                    usuario: usuario,
                     pass: pass
                 },
                 headers: {
