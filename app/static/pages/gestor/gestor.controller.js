@@ -59,6 +59,10 @@ app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function(
         $scope.hideMenu();
     }
 
+    $scope.pageMetrica = function(){
+        $location.path("/gestor/metrica");
+        $scope.hideMenu();
+    }
 
     $scope.showMenu = function () {
         $(".menu-wrap").css('display','block');

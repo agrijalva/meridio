@@ -156,6 +156,14 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         templateUrl: "pages/gestor/licencia/gesLicencia.html",
         controller: "gesLicenciaCtrl"
     })
+
+    .state("metrica", {
+        url: "/metrica",
+        parent: "gestor",
+        cache:false,
+        templateUrl: "pages/gestor/metrica/gesMetrica.html",
+        controller: "gesMetricaCtrl"
+    })
 }]);
 
 var Authorization = 'eb60959f5eac3e1d081244c33d4fb850';
