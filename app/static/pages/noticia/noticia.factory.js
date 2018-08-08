@@ -156,10 +156,27 @@ app.factory( 'noticiaFactory', function( $http ){
             });
         },
 
-        enlacesTodas: function() {
+        enlacesTodas: function( idUsuario ) {
             return $http({
                 url: Path_Enlaces + 'enlacesTodas/',
                 method: "GET",
+                params:{
+                    idUsuario: idUsuario
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        aprobarEnlace: function( idUsuario, idEnlace ) {
+            return $http({
+                url: Path_Enlaces + 'aprobarEnlace/',
+                method: "GET",
+                params:{
+                    idUsuario: idUsuario,
+                    idEnlace: idEnlace
+                },
                 headers: {
                     'Content-Type': 'application/json'
                 }

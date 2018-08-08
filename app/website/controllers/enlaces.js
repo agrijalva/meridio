@@ -22,11 +22,9 @@ var Enlaces = function (conf) {
 
 Enlaces.prototype.get_enlacesTodas = function(req, res, next) {
     var self = this;
-    // var params = [{ name: 'idBanco', value: req.query.idBanco, type: self.model.types.INT },
-    //               { name: 'idEmpresa', value: req.query.idEmpresa, type: self.model.types.STRING }
-    //               ];
+    var params = [{ name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT }];
     
-    var params = [];
+    // var params = [];
 
     this.model.query('ENL_TODAS_SP', params, function(error, result) {
         self.view.expositor(res, {
@@ -41,6 +39,21 @@ Enlaces.prototype.get_getById = function(req, res, next) {
     var params = [{ name: 'idEnlace', value: req.query.idEnlace, type: self.model.types.STRING } ];
 
     this.model.query('ENL_SOLOUNO_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result[0]
+        });
+    });
+};
+
+Enlaces.prototype.get_aprobarEnlace = function(req, res, next) {
+    var self = this;
+    var params = [  
+                    { name: 'idEnlace', value: req.query.idEnlace, type: self.model.types.STRING },
+                    { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.STRING } 
+                ];
+
+    this.model.query('ENL_APROBAR_SP', params, function(error, result) {
         self.view.expositor(res, {
             error: error,
             result: result[0]
@@ -77,6 +90,7 @@ Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {
         { name: 'descripcion', value: req.query.descripcion, type: self.model.types.STRING },
         { name: 'link', value: req.query.link, type: self.model.types.STRING },
         { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT },
+        { name: 'idMateria', value: req.query.idTema, type: self.model.types.INT },
         { name: 'idTema', value: req.query.idTema, type: self.model.types.INT },
         { name: 'idIdioma', value: req.query.idIdioma, type: self.model.types.INT },
         { name: 'idFuente', value: req.query.idFuente, type: self.model.types.INT },

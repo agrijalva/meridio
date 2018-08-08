@@ -1,6 +1,7 @@
 app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","gesEnlaceFactory", "noticiaFactory", function($scope, $sce, $location, filterFilter, gesEnlaceFactory, noticiaFactory ) {
-    // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
-    
+    $scope.DataUser = JSON.parse( localStorage.getItem("RCVUserData") );
+    $scope.idUsuario = parseInt($scope.DataUser.idUsuario);
+
     $scope.datosEnlace = {
         idUsuario: 1,
         titulo: '',
@@ -17,8 +18,31 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
         clave: ''
     }
 
+    $scope.aurotizarEnlace = function( idEnlace){
+        swal({
+            title: 'Meridio',
+            text: "¿Está seguro de autorizar este enlace?",
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Si',
+            closeOnConfirm: false
+        },
+        function(){
+            noticiaFactory.aprobarEnlace( $scope.idUsuario, idEnlace ).then(function(response){
+                $scope.init();
+                if( response.data.success ){
+                    swal("Merídio", "Enlace aprobada correctamente");
+                }
+                else{
+                    swal("Merídio", "No se ha podido aprobar esta enlace.");
+                }
+            });
+        }); 
+    }
+
     $scope.init = function() {
-        noticiaFactory.enlacesTodas().then(function(response){
+        noticiaFactory.enlacesTodas($scope.idUsuario).then(function(response){
             $scope.Enlaces = response.data;
         });
 
@@ -110,12 +134,11 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
                     swal("Meridio", "Ocurrio un problema al guardar el enlace"); 
                 else
                     $("#modalNuevaNoticia").modal("hide");
-                    noticiaFactory.enlacesTodas().then(function(response){
+                    noticiaFactory.enlacesTodas( $scope.idUsuario ).then(function(response){
                         $scope.Enlaces = response.data;
                     });
                     swal("Meridio", "Se guardo el nuevo enlace");   
             });
-
         }
     
     }	
