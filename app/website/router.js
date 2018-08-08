@@ -8,5 +8,6 @@ module.exports = {
      fuente: require('./controllers/fuente'),
      licencia: require('./controllers/licencia'),
      actividad: require('./controllers/actividad'),
-     materia: require('./controllers/materia')
+     materia: require('./controllers/materia'),
+     reportes: require('./controllers/reportes')
  }

@@ -1,18 +1,15 @@
-var Path_Favorito = API_Path + '/metrica/';
+var Path_Reportes = API_Path + '/reportes/';
 
 app.factory( 'gesMetricaFactory', function( $http ){
 	return {
-        // favoritoUsuario: function( idUsuario ) {
-        //     return $http({
-        //         url: Path_Actividad + 'favoritoUsuario/',
-        //         method: "GET",
-        //         params: {
-        //             idUsuario: idUsuario
-        //         },
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     });
-        // }
+        vistasPorMateria: function() {
+            return $http({
+                url: Path_Reportes + 'vistasPorMateria/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
     };
 });
