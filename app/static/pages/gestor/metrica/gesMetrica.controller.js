@@ -11,7 +11,7 @@ app.controller("gesMetricaCtrl", ["$scope", "$sce", "$location", "filterFilter",
 				text: "Vistas por Materia"
 			},
 			data: [{
-				type: "column",
+				type: "doughnut",
 				startAngle: 45,
 				showInLegend: false,
 				legendText: "",
