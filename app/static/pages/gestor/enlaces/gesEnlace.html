@@ -40,7 +40,13 @@
                                             </td>
                                             <td align="right" ng-show="enlace.estatus == 0">
                                                 <br>
-                                                <button class="btn btn-warning btn-xs" ng-click="aurotizarEnlace( enlace.idEnlace )"> <i class="fa fa-check"></i> Autorizar Enlace</button>
+                                                <button class="btn btn-warning btn-xs" ng-click="aurotizarEnlace( enlace.idEnlace )" ng-show="DataUser.idPerfil == 1"> 
+                                                    <i class="fa fa-check"></i> Autorizar Enlace
+                                                </button>
+
+                                                <div ng-show="DataUser.idPerfil != 1" class="text-info">
+                                                    <i class="fa fa-check"></i> Enlace endiente de Abrobar
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>

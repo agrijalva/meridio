@@ -1,4 +1,13 @@
 app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function($scope, $location, noticiaFactory) {
+    try{
+        $scope.DataUser     = JSON.parse( localStorage.getItem("RCVUserData") );
+        $scope.currentUser  = $scope.DataUser.usu_nombre;
+        $scope.idCatalogoUsuario = $scope.DataUser.idCatalogoUsuario;
+    }
+    catch( e ){
+        $location.path("/login");
+    }
+    
     $scope.user = '';
     $scope.pass = '';
 
@@ -84,6 +93,12 @@ app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function(
         if (!e.target.classList.contains('menu-wrap'))
             return;  
         $scope.hideMenu();
+    }
+
+    $scope.close = function(){
+        localStorage.setItem("RCVUserData", "");
+        $scope.hideMenu();
+        $location.path("/login");
     }
 
     $scope.init = function() {
