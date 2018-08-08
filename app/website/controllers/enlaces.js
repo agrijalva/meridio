@@ -90,7 +90,7 @@ Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {
         { name: 'descripcion', value: req.query.descripcion, type: self.model.types.STRING },
         { name: 'link', value: req.query.link, type: self.model.types.STRING },
         { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT },
-        { name: 'idMateria', value: req.query.idTema, type: self.model.types.INT },
+        { name: 'idMateria', value: req.query.idMateria, type: self.model.types.INT },
         { name: 'idTema', value: req.query.idTema, type: self.model.types.INT },
         { name: 'idIdioma', value: req.query.idIdioma, type: self.model.types.INT },
         { name: 'idFuente', value: req.query.idFuente, type: self.model.types.INT },
@@ -100,6 +100,8 @@ Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {
         { name: 'clave', value: req.query.clave, type: self.model.types.STRING }
     ];
 
+
+    // console.log(params);
     this.model.query('ENL_INSERT_SP', params, function(error, result) {
         self.view.expositor(res, {
             error: error,

@@ -10,6 +10,15 @@ app.factory( 'gesMetricaFactory', function( $http ){
                     'Content-Type': 'application/json'
                 }
             });
+        },
+        vistasPorDia: function() {
+            return $http({
+                url: Path_Reportes + 'vistasPorDia/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
         }
     };
 });

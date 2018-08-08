@@ -32,5 +32,17 @@ Reportes.prototype.get_vistasPorMateria = function (req, res, next) {
     });
 };
 
+Reportes.prototype.get_vistasPorDia = function (req, res, next) {
+    var self = this;
+    var params = [];
+
+    this.model.query('GRA_VISTASPORDIA_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
 
 module.exports = Reportes;
