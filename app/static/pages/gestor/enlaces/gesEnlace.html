@@ -38,6 +38,10 @@
                                                 <button class="btn btn-success btn-xs" disabled="">Editar</button>
                                                 <button class="btn btn-danger btn-xs" disabled="">Eliminar</button>
                                             </td>
+                                            <td align="right" ng-show="enlace.estatus == 0">
+                                                <br>
+                                                <button class="btn btn-warning btn-xs" ng-click="aurotizarEnlace( enlace.idEnlace )"> <i class="fa fa-check"></i> Autorizar Enlace</button>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
