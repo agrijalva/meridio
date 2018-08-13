@@ -157,8 +157,8 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         controller: "gesLicenciaCtrl"
     })
 
-    .state("metrica", {
-        url: "/metrica",
+    .state("estadisticas", {
+        url: "/estadisticas",
         parent: "gestor",
         cache:false,
         templateUrl: "pages/gestor/metrica/gesMetrica.html",

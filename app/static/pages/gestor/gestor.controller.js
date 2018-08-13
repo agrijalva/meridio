@@ -69,7 +69,7 @@ app.controller("gestorCtrl", ["$scope", "$location", "noticiaFactory", function(
     }
 
     $scope.pageMetrica = function(){
-        $location.path("/gestor/metrica");
+        $location.path("/gestor/estadisticas");
         $scope.hideMenu();
     }
 
