@@ -1,9 +1,133 @@
 <div ng-init="">
     <div class=container>
-        <h1>Estadísticas</h1>
+        <h1><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadísticas</h1>
+        <br><br>
+        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        	<div class="col col-sm-5">
+        		<h3>Vistas por materia</h3>
+        		<table class="table table-hover">
+        			<thead>
+        				<tr>
+        					<th>#</th>
+	        				<th>Materia</th>
+	        				<th>Vistas</th>
+	        				<th>Poncentaje</th>
+	        			</tr>	
+        			</thead>
+        			<tbody>
+	        			<tr ng-repeat="( key, item ) in Materias">
+	        				<td> {{ key + 1 }} </td>
+	        				<td ng-bind-html = "item.label"></td>
+	        				<td>{{item.v}}</td>
+	        				<td>{{ item.y }}%</td>
+	        			</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        	<div class="col col-sm-1"></div>
+        	<div class="col col-sm-6">
+        		<div id="pieContainer" style="height: 300px; width: 100%;"></div>
+        	</div>
+        	<br><br>
+        </div>
+
+
+        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        	<div class="col col-sm-5">
+        		<h3>Vistas por categoría</h3>
+        		<table class="table table-hover">
+        			<thead>
+        				<tr>
+        					<th>#</th>
+	        				<th>Categoría</th>
+	        				<th>Vistas</th>
+	        				<th>Poncentaje</th>
+	        			</tr>	
+        			</thead>
+        			<tbody>
+	        			<tr ng-repeat="( key, item ) in Categorias">
+	        				<td> {{ key + 1 }} </td>
+	        				<td ng-bind-html = "item.label"></td>
+	        				<td>{{item.v}}</td>
+	        				<td>{{ item.y }}%</td>
+	        			</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        	<div class="col col-sm-1"></div>
+        	<div class="col col-sm-6">
+        		<br><br><br>
+        		<div id="pieCategoria" style="height: 300px; width: 100%;"></div>
+        	</div>
+        	<br><br>
+        </div>        
+
+        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        	<div class="col col-sm-5">
+        		<h3>Vistas por tema</h3>
+        		<table class="table table-hover">
+        			<thead>
+        				<tr>
+        					<th>#</th>
+	        				<th>Tema</th>
+	        				<th>Vistas</th>
+	        				<th>Poncentaje</th>
+	        			</tr>	
+        			</thead>
+        			<tbody>
+	        			<tr ng-repeat="( key, item ) in Temas">
+	        				<td> {{ key + 1 }} </td>
+	        				<td ng-bind-html = "item.label"></td>
+	        				<td>{{item.v}}</td>
+	        				<td>{{ item.y }}%</td>
+	        			</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        	<div class="col col-sm-1"></div>
+        	<div class="col col-sm-6">
+        		<br><br><br>
+        		<div id="pieTema" style="height: 300px; width: 100%;"></div>
+        	</div>
+        	<br><br>
+        </div>       
+
+        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        	<div class="col col-sm-5">
+        		<h3>Vistas por formato</h3>
+        		<table class="table table-hover">
+        			<thead>
+        				<tr>
+        					<th>#</th>
+	        				<th>Formato</th>
+	        				<th>Vistas</th>
+	        				<th>Poncentaje</th>
+	        			</tr>	
+        			</thead>
+        			<tbody>
+	        			<tr ng-repeat="( key, item ) in Formatos">
+	        				<td> {{ key + 1 }} </td>
+	        				<td ng-bind-html = "item.label"></td>
+	        				<td>{{item.v}}</td>
+	        				<td>{{ item.y }}%</td>
+	        			</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        	<div class="col col-sm-1"></div>
+        	<div class="col col-sm-6">
+        		<div id="pieFormato" style="height: 300px; width: 100%;"></div>
+        	</div>
+        	<br><br>
+        </div>
+
         
-        <div id="pieContainer" style="height: 300px; width: 100%;"></div>
-        <br>
-        <div id="barContainer" style="height: 250px; width: 700px; margin:100px auto;"></div>
+
+        <div class="row">
+        	<div class="col col-sm-12">
+        		<div id="barContainer" style="height: 250px; width: 100%; margin:100px auto;"></div>
+        	</div>
+        </div>
+        
     </div>
 </div>

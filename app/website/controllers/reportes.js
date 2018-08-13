@@ -22,9 +22,57 @@ var Reportes = function (conf) {
 
 Reportes.prototype.get_vistasPorMateria = function (req, res, next) {
     var self = this;
-    var params = [];
+    var params = [
+        { name: 'fechaInicio', value: req.query.fechaInicio, type: self.model.types.STRING },
+        { name: 'fechaFin', value: req.query.fechaFin, type: self.model.types.STRING }
+    ];
 
     this.model.query('GRA_VISTASPORMATERIA_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Reportes.prototype.get_vistasPorCategoria = function (req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'fechaInicio', value: req.query.fechaInicio, type: self.model.types.STRING },
+        { name: 'fechaFin', value: req.query.fechaFin, type: self.model.types.STRING }
+    ];
+
+    this.model.query('GRA_VISTASPORCATEGORIA_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Reportes.prototype.get_vistasPorTema = function (req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'fechaInicio', value: req.query.fechaInicio, type: self.model.types.STRING },
+        { name: 'fechaFin', value: req.query.fechaFin, type: self.model.types.STRING }
+    ];
+
+    this.model.query('GRA_VISTASPORTEMA_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Reportes.prototype.get_vistasPorFormato = function (req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'fechaInicio', value: req.query.fechaInicio, type: self.model.types.STRING },
+        { name: 'fechaFin', value: req.query.fechaFin, type: self.model.types.STRING }
+    ];
+
+    this.model.query('GRA_VISTASPORFORMATO_SP', params, function (error, result) {
         self.view.expositor(res, {
             error: error,
             result: result
