@@ -57,6 +57,28 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
         });
     }
 
+    $scope.mostrarCategoria = function(){
+        $(".loading").fadeIn();
+
+        if( $scope.filtros == 2 ){            
+            $scope.busqueda.titulo = $scope.busquedaGeneral;
+            $scope.busqueda.descripcion = $scope.busquedaGeneral;
+            $scope.busqueda.idCategoria = $scope.idCategoria;
+        }
+
+        noticiaFactory.busquedaEnlaces( $scope.busqueda ).then(function(response){
+            $scope.contentLinks = response.data.length;
+            if( response.data.length != 0 ){
+                $scope.Enlaces = response.data;
+            }
+            else{
+                swal("Meridio", "No se encontraron resultados");
+            }
+            $scope.inCatego = false;
+            $(".loading").fadeOut();
+        });
+    }
+
     $scope.selectCategoria  = function( indice ){
         $scope.categoria    = $scope.categorias[ indice ];
         $scope.idCategoria  = $scope.categoria.idCategoria;
