@@ -1,8 +1,40 @@
 <div ng-init="">
     <div class=container>
         <h1><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadísticas</h1>
+
+
+
+        <div class="row md-controlado" style="border-bottom: solid 5px #f4f4f4">
+            <div class="col-sm-12">
+                <p class="text-info">Selecciona el periodo para consultar las estadisticas</p>
+            </div>
+            <div class="col-sm-3">
+                <form name="myForm" flex-gt-xs>
+                    <md-input-container>
+                        <label>Fecha de Inicio</label>
+                        <md-datepicker ng-model="ctrl.myDate1" name="dateField" md-min-date="ctrl.minDate" 
+                        md-max-date="ctrl.maxDate"></md-datepicker>
+                  </md-input-container>
+                </form>
+            </div>
+            <div class="col-sm-3">
+                <form name="myForm" flex-gt-xs>
+                  <md-input-container>
+                    <label>Fecha Final</label>
+                    <md-datepicker ng-model="ctrl.myDate2" name="dateField" md-min-date="ctrl.minDate"
+                      md-max-date="ctrl.maxDate"></md-datepicker>
+                  </md-input-container>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-warning" ng-click="generarResumen();">Generar Estadisticas</button>
+            </div>
+        </div>
+
+
+
         <br><br>
-        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        <div class="row" style="border-bottom: solid 5px #f4f4f4" ng-show="showEstadisticas">
         	<div class="col col-sm-5">
         		<h3>Vistas por materia</h3>
         		<table class="table table-hover">
@@ -32,7 +64,7 @@
         </div>
 
 
-        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        <div class="row" style="border-bottom: solid 5px #f4f4f4" ng-show="showEstadisticas">
         	<div class="col col-sm-5">
         		<h3>Vistas por categoría</h3>
         		<table class="table table-hover">
@@ -62,7 +94,7 @@
         	<br><br>
         </div>        
 
-        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        <div class="row" style="border-bottom: solid 5px #f4f4f4" ng-show="showEstadisticas">
         	<div class="col col-sm-5">
         		<h3>Vistas por tema</h3>
         		<table class="table table-hover">
@@ -92,7 +124,7 @@
         	<br><br>
         </div>       
 
-        <div class="row" style="border-bottom: solid 5px #f4f4f4">
+        <div class="row" style="border-bottom: solid 5px #f4f4f4" ng-show="showEstadisticas">
         	<div class="col col-sm-5">
         		<h3>Vistas por formato</h3>
         		<table class="table table-hover">
@@ -123,7 +155,7 @@
 
         
 
-        <div class="row">
+        <div class="row" ng-show="showEstadisticas">
         	<div class="col col-sm-12">
         		<div id="barContainer" style="height: 250px; width: 100%; margin:100px auto;"></div>
         	</div>
