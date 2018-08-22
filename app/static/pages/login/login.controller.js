@@ -10,7 +10,7 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
     		swal("Merídio", 'Proporciona tu usuario para poder acceder al sistema');
     	}
     	else if( $scope.pass == '' ){
-    		swal("Merídio", 'Proporciona tu contrasema para poder acceder al sistema');
+    		swal("Merídio", 'Proporciona tu contraseña para poder acceder al sistema');
     	}
     	else{
 	    	loginFactory.login( $scope.user, $scope.pass ) .then(function(result){

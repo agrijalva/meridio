@@ -20,7 +20,7 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
 
     $scope.aurotizarEnlace = function( idEnlace){
         swal({
-            title: 'Meridio',
+            title: 'Merídio',
             text: "¿Está seguro de autorizar este enlace?",
             showCancelButton: true,
             cancelButtonColor: '#d33',
@@ -95,31 +95,31 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
     $scope.guardarEnlace = function(){
         
         if($scope.datosEnlace.titulo ==  ''){
-            swal("Meridio", "Falta especificar el campo: titulo");
+            swal("Merídio", "Falta especificar el campo: titulo");
         }
         else if($scope.datosEnlace.descripcion ==  ''){
-            swal("Meridio", "Falta especificar el campo: descripcion");
+            swal("Merídio", "Falta especificar el campo: descripcion");
         }
         else if($scope.datosEnlace.link ==  ''){
-            swal("Meridio", "Falta especificar el campo: link");
+            swal("Merídio", "Falta especificar el campo: link");
         }
         else if($scope.datosEnlace.idCategoria ==  0){
-            swal("Meridio", "Falta especificar el campo: categoria");
+            swal("Merídio", "Falta especificar el campo: categoria");
         }
         else if($scope.datosEnlace.idTema ==  0){
-            swal("Meridio", "Falta especificar el campo: tema");
+            swal("Merídio", "Falta especificar el campo: tema");
         }
         else if($scope.datosEnlace.idIdioma ==  0){
-            swal("Meridio", "Falta especificar el campo: idioma");
+            swal("Merídio", "Falta especificar el campo: idioma");
         }
         else if($scope.datosEnlace.idFuente ==  0){
-            swal("Meridio", "Falta especificar el campo: fuente");
+            swal("Merídio", "Falta especificar el campo: fuente");
         }
         else if($scope.datosEnlace.idLicencia ==  0){
-            swal("Meridio", "Falta especificar el campo: licencia");
+            swal("Merídio", "Falta especificar el campo: licencia");
         }
         else if($scope.datosEnlace.idFormato ==  0){
-            swal("Meridio", "Falta especificar el campo: formato");
+            swal("Merídio", "Falta especificar el campo: formato");
         }
         // else if($scope.datosEnlace.autor ==  ''){
         //     swal("Meridio", "Falta especificar el campo: autor");
@@ -131,13 +131,13 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
             noticiaFactory.nuevoEnlace( $scope.datosEnlace ).then(function(response){
                 $scope.resultado = response.data;
                 if( $scope.resultado.length == 0 )
-                    swal("Meridio", "Ocurrio un problema al guardar el enlace"); 
+                    swal("Merídio", "Ocurrio un problema al guardar el enlace"); 
                 else
                     $("#modalNuevaNoticia").modal("hide");
                     noticiaFactory.enlacesTodas( $scope.idUsuario ).then(function(response){
                         $scope.Enlaces = response.data;
                     });
-                    swal("Meridio", "Se guardo el nuevo enlace");   
+                    swal("Merídio", "Se guardo el nuevo enlace");   
             });
         }
     

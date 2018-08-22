@@ -19,6 +19,8 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
     }
 
     $scope.pnlNoticias = function(){
+        // location.href = "/#/enlaces/home"
+        $scope.idCategoria = 0
     	$location.path("/enlaces/home");
         $scope.hideMenu();
     }
