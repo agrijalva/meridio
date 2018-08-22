@@ -19,10 +19,13 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
     }
 
     $scope.pnlNoticias = function(){
-        // location.href = "/#/enlaces/home"
-        $scope.idCategoria = 0
-    	$location.path("/enlaces/home");
-        $scope.hideMenu();
+        if( window.location.hash == '#/enlaces/home' ){
+            location.reload();            
+        }
+        else{
+            $location.path("/enlaces/home");
+            $scope.hideMenu();
+        }
     }
 
     $scope.pnlFavoritos = function(){
