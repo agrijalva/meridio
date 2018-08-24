@@ -10,7 +10,8 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
     $scope.frmCategoria = {
         cat_nombre: '',
         cat_orden: ''
-    }
+    };
+    $scope.loadImg = false;
 
     $scope.init = function () {
         noticiaFactory.categorias().then(function (response) {
@@ -31,6 +32,7 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
             $scope.reader = new FileReader();
             $scope.reader.onload = $scope.imageIsLoaded;
             $scope.reader.readAsDataURL(file);
+            $scope.loadImg = true;
         };
     };
 
@@ -46,18 +48,19 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
     };
 
     $scope.guardarCategoria = function () {
-        var img = $scope.reader.result.split(",");
-        var sendData = {
-            usuario: 1,
-            nombre: $scope.frmCategoria.cat_nombre,
-            order: $scope.frmCategoria.cat_orden,
-            imagen: img[1],
-            imagenName: $scope.files[0].name,
-            imageType: $scope.files[0].type
-        };
-        if (sendData.nombre == '' || sendData.order == '' || sendData.imagen == '') {
+       
+        if (frmCategoria.cat_nombre == '' || frmCategoria.cat_orden == '' || !$scope.loadImg) {
             swal('Alto', 'Debes llenar todos los campos', 'warning');
         } else {
+            var img = $scope.reader.result.split(",");
+            var sendData = {
+                usuario: 1,
+                nombre: $scope.frmCategoria.cat_nombre,
+                order: $scope.frmCategoria.cat_orden,
+                imagen: img[1],
+                imagenName: $scope.files[0].name,
+                imageType: $scope.files[0].type
+            };
             gesCategoriaFactory.nuevaCategoria(sendData).then(function (response) {
                 if (response.data[0].success == 1) {
                     swal('Listo', response.data[0].msg, 'success');
@@ -103,20 +106,17 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
             imageType: $scope.files[0].type,
             idCategoria: $scope.idCategoria
         };
-        if (sendData.nombre == '' || sendData.order == '' || sendData.imagen == '') {
-            swal('Alto', 'Debes llenar todos los campos', 'warning');
-        } else {
-            gesCategoriaFactory.editarCategoria(sendData).then(function(response){
-                console.log( 'response', response );
-                if( response.data[0].success == 1 ){
-                    swal('Listo', response.data[0].msg, 'success');
-                    $scope.init();
-                    $("#modalEditarCat").modal("hide");
-                }else{
-                    swal('Alto', response.data[0].msg, 'error');
-                };
-            });
-        };
+
+        gesCategoriaFactory.editarCategoria(sendData).then(function (response) {
+            if (response.data[0].success == 1) {
+                swal('Listo', response.data[0].msg, 'success');
+                $scope.init();
+                $("#modalEditarCat").modal("hide");
+            } else {
+                swal('Alto', response.data[0].msg, 'error');
+            };
+        });
+
     };
 
 }]);

@@ -104,8 +104,6 @@ Categoria.prototype.post_editarCategoria = function (req, res, next) {
             });
         } else {
             self.model.query('CAT_UPDATE_SP', params, function (error, result) {
-                console.log('result', result);
-                console.log('error', error);
                 self.view.expositor(res, {
                     error: error,
                     result: result
