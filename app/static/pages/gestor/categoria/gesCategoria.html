@@ -1,5 +1,89 @@
-<div ng-init="">
+<div ng-init="init()">
     <div class=container>
-    	<h1>Categorias</h1>
+        <div class="pnl-perfil">
+            <div class="col-sm-12">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div ng-show="contentLinks != 0" class="panel panel-default pnl-enlaces">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Categoria</h3>
+                            <button class="btn btn-default pull-right" style="margin-top: -30px;" ng-click="nuevaCategoria();">
+                                <i class="fa fa-plus"></i> Nuevo Categoria
+                            </button>
+                        </div>
+                        <!-- Inicio del repeat -->
+                        <div>
+                            <div class="panel-body">
+                                <table width="100%" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th> <strong> # </strong></th>
+                                            <th> <strong> Imagen </strong></th>
+                                            <th> <strong> Nombre </strong></th>
+                                            <th> <strong> Orden </strong></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="cat in categoria">
+                                        <td>
+                                            {{$index + 1}}
+                                        </td>
+                                        <td>
+                                            <img src="{{cat.imagen}}" style="max-width: 100px;">
+                                        </td>
+                                        <td>
+                                            <label>{{cat.categoria}}</label>
+                                        </td>
+                                        <td>
+                                            <label>{{cat.orden}}</label>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-xs">Editar</button>
+                                            <button class="btn btn-danger btn-xs" ng-click="deleteCategoria(cat);">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Fin del repeat -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Insert -->
+<div class="modal fade" id="modalNuevaCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="guardarCategoria();" name="frmCategoria" id="frmCategoria">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nueva Categoria</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmCategoria.cat_nombre">
+
+                            <label><small>Orden <small><i class="fa fa-asterisk text-danger"></i></small></small></label>
+                            <input name="cat_orden" type="text" class="form-control" ng-model="frmCategoria.cat_orden"></input>
+
+                            <label><small>Imagen <small><i class="fa fa-asterisk text-danger"></i></small></small></label>
+                            <input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Guardar Categoria</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

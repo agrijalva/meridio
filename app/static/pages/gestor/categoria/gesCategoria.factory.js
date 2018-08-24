@@ -1,4 +1,5 @@
 var Path_Favorito      = API_Path + '/enlaces/';
+var Path_Categorias     = API_Path+ '/categoria/'
 
 app.factory( 'gesCategoriaFactory', function( $http ){
 	return {
@@ -12,6 +13,14 @@ app.factory( 'gesCategoriaFactory', function( $http ){
                 headers: {
                     'Content-Type': 'application/json'
                 }
+            });
+        },
+        nuevaCategoria: function(sendData) {
+            return $http({
+                url: Path_Categorias + 'nuevaCategoria/',
+                method: "POST",
+                data: sendData,
+                headers: {'Content-Type': 'application/json'}
             });
         }
     };

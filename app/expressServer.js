@@ -15,8 +15,9 @@ router = require('./website/router');
       this.expressServer = express();
 
     // middlewares
-    this.expressServer.use(bodyParser.urlencoded({extended: true}))
-    this.expressServer.use(bodyParser.json());
+    this.expressServer.use(bodyParser.urlencoded({limit: '250mb', extended: true}))
+    this.expressServer.use(bodyParser.json({limit: '250mb'}));
+    this.expressServer.use(bodyParser({limit: '250mb'}));
     for (var middleware in middlewares){
       this.expressServer.use(middlewares[middleware]);
     }

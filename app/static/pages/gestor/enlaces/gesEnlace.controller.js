@@ -50,7 +50,7 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
     }
 
     $scope.openNewLinck = function(){
-        document.getElementById("frmEnlace").reset();
+        document.getElementById("frmCategoria").reset();
         $("#modalNuevaNoticia").modal("show");
     }
 
