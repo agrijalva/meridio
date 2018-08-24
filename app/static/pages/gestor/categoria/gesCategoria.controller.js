@@ -70,8 +70,53 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
         };
     };
 
-    $scope.deleteCategoria = function(idCategoria){
-        console.log( 'idCategoria', idCategoria );
+    $scope.deleteCategoria = function (idCategoria) {
+        gesCategoriaFactory.deleteCategoria(idCategoria.idCategoria).then(function (response) {
+            console.log(response)
+            if (response.data[0].success == 1) {
+                swal('Listo', response.data[0].msg, 'success');
+                $scope.init();
+            } else {
+                swal('Alto', response.data[0].msg, 'error');
+            }
+        });
+    };
+
+    $scope.editarCategoria = function (categoria) {
+        $scope.idCategoria = categoria.idCategoria;
+        $scope.editImg = categoria.imagen;
+        $("#modalEditarCat").modal("show");
+        $scope.frmCategoriaEdit = {
+            cat_nombre: categoria.categoria,
+            cat_orden: categoria.orden
+        };
+    };
+
+    $scope.saveEditarCat = function () {
+        var img = $scope.reader.result.split(",");
+        var sendData = {
+            usuario: 1,
+            nombre: $scope.frmCategoriaEdit.cat_nombre,
+            order: $scope.frmCategoriaEdit.cat_orden,
+            imagen: img[1],
+            imagenName: $scope.files[0].name,
+            imageType: $scope.files[0].type,
+            idCategoria: $scope.idCategoria
+        };
+        if (sendData.nombre == '' || sendData.order == '' || sendData.imagen == '') {
+            swal('Alto', 'Debes llenar todos los campos', 'warning');
+        } else {
+            gesCategoriaFactory.editarCategoria(sendData).then(function(response){
+                console.log( 'response', response );
+                if( response.data[0].success == 1 ){
+                    swal('Listo', response.data[0].msg, 'success');
+                    $scope.init();
+                    $("#modalEditarCat").modal("hide");
+                }else{
+                    swal('Alto', response.data[0].msg, 'error');
+                };
+            });
+        };
     };
 
 }]);

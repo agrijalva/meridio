@@ -37,7 +37,7 @@
                                             <label>{{cat.orden}}</label>
                                         </td>
                                         <td>
-                                            <button class="btn btn-success btn-xs">Editar</button>
+                                            <button class="btn btn-success btn-xs" ng-click="editarCategoria(cat);">Editar</button>
                                             <button class="btn btn-danger btn-xs" ng-click="deleteCategoria(cat);">Eliminar</button>
                                         </td>
                                     </tr>
@@ -82,6 +82,42 @@
                         son obligatorios</span>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-info">Guardar Categoria</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="saveEditarCat();" name="frmCategoriaEdit" id="frmCategoriaEdit">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar Categoria</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmCategoriaEdit.cat_nombre">
+
+                            <label><small>Orden <small><i class="fa fa-asterisk text-danger"></i></small></small></label>
+                            <input name="cat_orden" type="text" class="form-control" ng-model="frmCategoriaEdit.cat_orden"><br>
+                            <img src="{{editImg}}" style="max-width: 100px;"><br>
+                            <label><small>Imagen <small><i class="fa fa-asterisk text-danger"></i></small></small></label>
+                            <input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Editar Categoria</button>
                 </div>
             </form>
         </div>

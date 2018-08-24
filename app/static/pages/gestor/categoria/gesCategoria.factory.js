@@ -22,6 +22,24 @@ app.factory( 'gesCategoriaFactory', function( $http ){
                 data: sendData,
                 headers: {'Content-Type': 'application/json'}
             });
+        },
+        deleteCategoria: function(idCategoria) {
+            return $http({
+                url: Path_Categorias + 'deleteCategoria/',
+                method: "GET",
+                params: {
+                    idCategoria: idCategoria
+                },
+                headers: {'Content-Type': 'application/json'}
+            });
+        },
+        editarCategoria: function(sendData) {
+            return $http({
+                url: Path_Categorias + 'editarCategoria/',
+                method: "POST",
+                data: sendData,
+                headers: {'Content-Type': 'application/json'}
+            });
         }
     };
 });
