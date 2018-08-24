@@ -1,4 +1,5 @@
 var Path_Favorito      = API_Path + '/enlaces/';
+var Path_Temas         = API_Path + '/tema/';
 
 app.factory( 'gesTemaFactory', function( $http ){
 	return {
@@ -8,6 +9,54 @@ app.factory( 'gesTemaFactory', function( $http ){
                 method: "GET",
                 params: {
                     idUsuario: idUsuario
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        getTemas: function() {
+            return $http({
+                url: Path_Temas + 'getTemas/',
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        nuevoTema: function(tema,idUsuario) {
+            return $http({
+                url: Path_Temas + 'nuevoTema/',
+                method: "GET",
+                params: {
+                    tema: tema,
+                    idUsuario: idUsuario
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        deleteTema: function(idTema) {
+            return $http({
+                url: Path_Temas + 'deleteTema/',
+                method: "GET",
+                params: {
+                    idTema: idTema
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
+        editarTema: function(tema, idTema) {
+            return $http({
+                url: Path_Temas + 'editarTema/',
+                method: "GET",
+                params: {
+                    tema: tema,
+                    idTema: idTema
                 },
                 headers: {
                     'Content-Type': 'application/json'

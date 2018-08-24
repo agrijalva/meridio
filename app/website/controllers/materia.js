@@ -38,6 +38,7 @@ Materia.prototype.get_insertMateria = function (req, res, next) {
     
     var params = [
         { name: 'materia', value: req.query.nombre, type: self.model.types.STRING },
+        { name: 'estatus', value: 1, type: self.model.types.INT },
         { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT }
     ];
     this.model.query('MAT_INSERT_SP', params, function (error, result) {
