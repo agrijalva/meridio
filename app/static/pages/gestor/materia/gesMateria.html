@@ -1,5 +1,105 @@
-<div ng-init="">
+<div ng-init="init()">
     <div class=container>
-    	<h1>Materia</h1>
+        <div class="pnl-perfil">
+            <div class="col-sm-12">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div ng-show="contentLinks != 0" class="panel panel-default pnl-enlaces">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Materia</h3>
+                            <button class="btn btn-default pull-right" style="margin-top: -30px;" ng-click="nuevaMateria();">
+                                <i class="fa fa-plus"></i> Nueva Materia
+                            </button>
+                        </div>
+                        <!-- Inicio del repeat -->
+                        <div>
+                            <div class="panel-body">
+                                <table width="100%" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="30"> <strong> # </strong></th>
+                                            <th> <strong> Materia </strong></th>
+                                            <th width="150"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="materia in materias">
+                                        <td>
+                                            <span  style="font-size:15px;"> {{$index + 1}} </span>
+                                        </td>
+                                        <td>
+                                            <span  style="font-size:15px;">{{materia.materia}}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-xs" ng-click="editarMateria(materia);">Editar</button>
+                                            <button class="btn btn-danger btn-xs" ng-click="deleteMateria(materia);">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Fin del repeat -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Insert -->
+<div class="modal fade" id="modalNuevaMat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="guardarMateria();" name="frmMateria" id="frmMateria">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nueva Materia</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre de la materia <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmMateria.cat_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Guardar Materia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarMat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="saveEditarMat();" name="frmMateriaEdit" id="frmMateriaEdit">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar Materia</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmMateriaEdit.cat_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Editar Materia</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

@@ -22,8 +22,7 @@ var Materia = function (conf) {
 
 Materia.prototype.get_materias = function (req, res, next) {
     var self = this;
-    var params = [];
-
+    // var params = [];
     var params = [
     ];
     this.model.query('MAT_GETMATERIAS_SP', params, function (error, result) {
@@ -34,5 +33,48 @@ Materia.prototype.get_materias = function (req, res, next) {
     });
 };
 
+Materia.prototype.get_insertMateria = function (req, res, next) {
+    var self = this;
+    
+    var params = [
+        { name: 'materia', value: req.query.nombre, type: self.model.types.STRING },
+        { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT }
+    ];
+    this.model.query('MAT_INSERT_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Materia.prototype.get_deleteMateria = function (req, res, next) {
+    var self = this;
+    
+    var params = [
+        { name: 'idMateria', value: req.query.idMateria, type: self.model.types.INT }
+    ];
+    this.model.query('MAT_DELETE_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Materia.prototype.get_editarMateria = function (req, res, next) {
+    var self = this;
+    
+    var params = [
+        { name: 'materia', value: req.query.materia, type: self.model.types.STRING },
+        { name: 'idMateria', value: req.query.idMateria, type: self.model.types.INT }
+    ];
+    this.model.query('MAT_UPDATE_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
 
 module.exports = Materia;
