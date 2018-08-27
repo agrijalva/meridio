@@ -26,27 +26,48 @@ app.controller("gesMateriaCtrl", ["$scope", "$sce", "$location","filterFilter","
         if( $scope.frmMateria.cat_nombre == '' ){
             swal( 'Alto', 'Llena todos los campos.', 'error' );
         }else{
-            gesMateriaFactory.insertMateria( $scope.frmMateria.cat_nombre, $scope.idUsuario ).then(function(response){
-                if( response.data[0].success == 1 ){
-                    swal( 'Listo', response.data[0].msg, 'success' );
-                    $scope.init();
-                    $("#modalNuevaMat").modal("hide");
-                }else{
-                    swal( 'Alto', response.data[0].msg, 'error' );
-                }
+            swal({
+                title: 'Merídio',
+                text: "¿Está seguro de guardar esta materia?",
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No',
+                confirmButtonText: 'Si',
+                closeOnConfirm: false
+            },
+            function(){
+                gesMateriaFactory.insertMateria( $scope.frmMateria.cat_nombre, $scope.idUsuario ).then(function(response){
+                    if( response.data[0].success == 1 ){
+                        swal( 'Listo', response.data[0].msg, 'success' );
+                        $scope.init();
+                        $("#modalNuevaMat").modal("hide");
+                    }else{
+                        swal( 'Alto', response.data[0].msg, 'error' );
+                    }
+                });
             });
         };
     };
 
     $scope.deleteMateria = function(materia){
-        console.log( 'matyeria', materia );
-        gesMateriaFactory.deleteMateria(materia.idMateria).then(function(response){
-            if( response.data[0].success == 1 ){
-                swal( 'Listo', response.data[0].msg, 'success' );
-                $scope.init();
-            }else{
-                swal( 'Alto', response.data[0].msg, 'error' ); 
-            }
+        swal({
+            title: 'Merídio',
+            text: "¿Está seguro de elimar esta materia?",
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Si',
+            closeOnConfirm: false
+        },
+        function(){
+            gesMateriaFactory.deleteMateria(materia.idMateria).then(function(response){
+                if( response.data[0].success == 1 ){
+                    swal( 'Listo', response.data[0].msg, 'success' );
+                    $scope.init();
+                }else{
+                    swal( 'Alto', response.data[0].msg, 'error' ); 
+                }
+            });
         });
     };
 
@@ -59,14 +80,25 @@ app.controller("gesMateriaCtrl", ["$scope", "$sce", "$location","filterFilter","
     };
 
     $scope.saveEditarMat = function(){
-        gesMateriaFactory.editarMateria($scope.frmMateriaEdit.cat_nombre, $scope.idMateria).then(function(response){
-            if( response.data[0].success == 1 ){
-                $("#modalEditarMat").modal("hide");
-                swal( 'Listo', response.data[0].msg, 'success' );
-                $scope.init();
-            }else{
-                swal( 'Alto', response.data[0].msg, 'error' );
-            }
+        swal({
+            title: 'Merídio',
+            text: "¿Está seguro de editar esta materia?",
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Si',
+            closeOnConfirm: false
+        },
+        function(){
+            gesMateriaFactory.editarMateria($scope.frmMateriaEdit.cat_nombre, $scope.idMateria).then(function(response){
+                if( response.data[0].success == 1 ){
+                    $("#modalEditarMat").modal("hide");
+                    swal( 'Listo', response.data[0].msg, 'success' );
+                    $scope.init();
+                }else{
+                    swal( 'Alto', response.data[0].msg, 'error' );
+                }
+            });
         });
     };
 
