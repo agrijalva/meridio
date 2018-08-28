@@ -52,6 +52,7 @@ Tema.prototype.get_nuevoTema = function (req, res, next) {
     var self = this;
     var params = [
         { name: 'tema', value: req.query.tema, type: self.model.types.STRING },
+        { name: 'idMateria', value: req.query.idMateria, type: self.model.types.INT },
         { name: 'estatus', value: 1, type: self.model.types.INT },
         { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT }
     ];

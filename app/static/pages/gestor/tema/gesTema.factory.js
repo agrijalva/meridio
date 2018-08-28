@@ -24,12 +24,13 @@ app.factory( 'gesTemaFactory', function( $http ){
                 }
             });
         },
-        nuevoTema: function(tema,idUsuario) {
+        nuevoTema: function(tema,idMateria,idUsuario) {
             return $http({
                 url: Path_Temas + 'nuevoTema/',
                 method: "GET",
                 params: {
                     tema: tema,
+                    idMateria: idMateria,
                     idUsuario: idUsuario
                 },
                 headers: {

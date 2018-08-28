@@ -1,4 +1,4 @@
-app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","gesTemaFactory", function($scope, $sce, $location, filterFilter, gesTemaFactory ) {
+app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","gesTemaFactory", "noticiaFactory", function($scope, $sce, $location, filterFilter, gesTemaFactory, noticiaFactory ) {
     // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
     $scope.editorOptions = {
 	    // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
@@ -9,7 +9,8 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
     $scope.temas = '';
 
     $scope.frmTema = {
-        cat_nombre: ''
+        cat_nombre: '',
+        idMateria: 0
     };
 
 
@@ -17,7 +18,15 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
         gesTemaFactory.getTemas().then(function (response) {
             $scope.temas = response.data;
         });
+
+        $scope.getMaterias();
     };
+
+    $scope.getMaterias = function(){
+        noticiaFactory.getMaterias().then(function(response){
+            $scope.materias = response.data;
+        });
+    }
 
     $scope.nuevaTema = function(){
         document.getElementById("frmTema").reset();
@@ -25,6 +34,7 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
     };
 
     $scope.guardarTema = function(){
+        console.log( 'frmTema', $scope.frmTema );
         if( $scope.frmTema.cat_nombre == '' ){
             swal( 'Alto', 'Llena todos los campos.', 'error' );
         }else{
@@ -38,7 +48,7 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
                 closeOnConfirm: false
             },
             function(){
-                gesTemaFactory.nuevoTema($scope.frmTema.cat_nombre, $scope.idUsuario).then(function(response){
+                gesTemaFactory.nuevoTema($scope.frmTema.cat_nombre, $scope.frmTema.idMateria, $scope.idUsuario).then(function(response){
                     if( response.data[0].success == 1 ){
                         swal( 'Listo', response.data[0].msg, 'success' );
                         $scope.init();
