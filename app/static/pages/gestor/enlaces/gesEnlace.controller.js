@@ -18,6 +18,13 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
         clave: ''
     }
 
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+    // $scope.data = [];
+    // $scope.numberOfPages=function(){
+    //     return Math.ceil($scope.Enlaces.length/$scope.pageSize);
+    // }
+
     $scope.aurotizarEnlace = function( idEnlace){
         swal({
             title: 'Merídio',
@@ -44,13 +51,15 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
     $scope.init = function() {
         noticiaFactory.enlacesTodas($scope.idUsuario).then(function(response){
             $scope.Enlaces = response.data;
+            $scope.numberOfPages = Math.ceil($scope.Enlaces.length/$scope.pageSize); $scope.Enlaces.length;
+            // console.log( $scope.numberOfPages );
         });
 
         $scope.loadCombos();
     }
 
     $scope.openNewLinck = function(){
-        document.getElementById("frmCategoria").reset();
+        document.getElementById("frmEnlace").reset();
         $("#modalNuevaNoticia").modal("show");
     }
 
