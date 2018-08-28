@@ -35,5 +35,59 @@ Tema.prototype.get_temaByIdMat = function (req, res, next) {
     });
 };
 
+Tema.prototype.get_getTemas = function (req, res, next) {
+    var self = this;
+    
+    var params = [];
+    this.model.query('TEM_TODOS_SP', params, function (error, result) {
+        
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Tema.prototype.get_nuevoTema = function (req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'tema', value: req.query.tema, type: self.model.types.STRING },
+        { name: 'estatus', value: 1, type: self.model.types.INT },
+        { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT }
+    ];
+    this.model.query('TEM_INSERT_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Tema.prototype.get_deleteTema = function (req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idTema', value: req.query.idTema, type: self.model.types.INT }
+    ];
+    this.model.query('TEM_DELETE_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Tema.prototype.get_editarTema = function (req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'tema', value: req.query.tema, type: self.model.types.STRING },
+        { name: 'idTema', value: req.query.idTema, type: self.model.types.INT }
+    ];
+    this.model.query('TEM_UPDATE_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
 
 module.exports = Tema;
