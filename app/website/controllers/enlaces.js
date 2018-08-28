@@ -99,9 +99,7 @@ Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {
         { name: 'autor', value: req.query.autor, type: self.model.types.STRING },
         { name: 'clave', value: req.query.clave, type: self.model.types.STRING }
     ];
-
-
-    // console.log(params);
+    
     this.model.query('ENL_INSERT_SP', params, function(error, result) {
         self.view.expositor(res, {
             error: error,

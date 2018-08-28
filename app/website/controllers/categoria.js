@@ -57,8 +57,6 @@ Categoria.prototype.post_nuevaCategoria = function (req, res, next) {
             });
         } else {
             self.model.query('CAT_INSERT_SP', params, function (error, result) {
-                console.log('result', result);
-                console.log('error', error);
                 self.view.expositor(res, {
                     error: error,
                     result: result
@@ -73,7 +71,7 @@ Categoria.prototype.get_deleteCategoria = function (req, res, next) {
     var params = [
         { name: 'idCategoria', value: req.query.idCategoria, type: self.model.types.INT }
     ];
-    console.log(params);
+    
     this.model.query('CAT_DELETE_SP', params, function (error, result) {
         self.view.expositor(res, {
             error: error,
