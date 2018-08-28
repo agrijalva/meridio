@@ -1,10 +1,10 @@
-app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","gesTemaFactory", "noticiaFactory", function($scope, $sce, $location, filterFilter, gesTemaFactory, noticiaFactory ) {
+app.controller("gesTemaCtrl", ["$scope", "$sce", "$location", "filterFilter", "gesTemaFactory", "noticiaFactory", function ($scope, $sce, $location, filterFilter, gesTemaFactory, noticiaFactory) {
     // $scope.DataUser     	= JSON.parse( localStorage.getItem("RCVUserData") );
     $scope.editorOptions = {
-	    // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
-	};
+        // settings more at http://docs.ckeditor.com/#!/guide/dev_configuration
+    };
 
-    $scope.DataUser = JSON.parse( localStorage.getItem("RCVUserData") );
+    $scope.DataUser = JSON.parse(localStorage.getItem("RCVUserData"));
     $scope.idUsuario = parseInt($scope.DataUser.idUsuario);
     $scope.temas = '';
 
@@ -13,31 +13,46 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
         idMateria: 0
     };
 
+    $scope.content = false;
 
     $scope.init = function () {
-        gesTemaFactory.getTemas().then(function (response) {
-            $scope.temas = response.data;
-        });
-
         $scope.getMaterias();
+        $scope.content = false;
     };
 
-    $scope.getMaterias = function(){
-        noticiaFactory.getMaterias().then(function(response){
+    $scope.getTemaById = function (idMateria) {
+        if (idMateria == 0) {
+            swal('Alto', 'Seleccione una materia', 'warning');
+            $scope.content = false;
+        } else {
+            gesTemaFactory.getTemas(idMateria).then(function (response) {
+                if (response.data.length > 0) {
+                    $scope.temas = response.data;
+                    $scope.content = true;
+                } else {
+                    swal( 'Alto', 'Esta materia no tiene temas.', 'error' );
+                    $scope.content = false;
+                }
+            });
+        }
+    };
+
+    $scope.getMaterias = function () {
+        noticiaFactory.getMaterias().then(function (response) {
             $scope.materias = response.data;
         });
     }
 
-    $scope.nuevaTema = function(){
+    $scope.nuevaTema = function () {
         document.getElementById("frmTema").reset();
         $("#modalNuevoTem").modal("show");
     };
 
-    $scope.guardarTema = function(){
-        console.log( 'frmTema', $scope.frmTema );
-        if( $scope.frmTema.cat_nombre == '' ){
-            swal( 'Alto', 'Llena todos los campos.', 'error' );
-        }else{
+    $scope.guardarTema = function () {
+        console.log('frmTema', $scope.frmTema);
+        if ($scope.frmTema.cat_nombre == '') {
+            swal('Alto', 'Llena todos los campos.', 'error');
+        } else {
             swal({
                 title: 'Merídio',
                 text: "¿Está seguro de guardar este tema?",
@@ -47,21 +62,21 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
                 confirmButtonText: 'Si',
                 closeOnConfirm: false
             },
-            function(){
-                gesTemaFactory.nuevoTema($scope.frmTema.cat_nombre, $scope.frmTema.idMateria, $scope.idUsuario).then(function(response){
-                    if( response.data[0].success == 1 ){
-                        swal( 'Listo', response.data[0].msg, 'success' );
-                        $scope.init();
-                        $("#modalNuevoTem").modal("hide");
-                    }else{
-                        swal( 'Alto', response.data[0].msg, 'error' ); 
-                    }
+                function () {
+                    gesTemaFactory.nuevoTema($scope.frmTema.cat_nombre, $scope.frmTema.idMateria, $scope.idUsuario).then(function (response) {
+                        if (response.data[0].success == 1) {
+                            swal('Listo', response.data[0].msg, 'success');
+                            $scope.init();
+                            $("#modalNuevoTem").modal("hide");
+                        } else {
+                            swal('Alto', response.data[0].msg, 'error');
+                        }
+                    });
                 });
-            });
         };
     };
 
-    $scope.deleteTema = function(tema){
+    $scope.deleteTema = function (tema) {
         swal({
             title: 'Merídio',
             text: "¿Está seguro de eliminar este tema?",
@@ -71,20 +86,20 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
             confirmButtonText: 'Si',
             closeOnConfirm: false
         },
-        function(){
-            gesTemaFactory.deleteTema(parseInt(tema.idTema)).then(function(response){
-                console.log( 'res', response );
-                if( response.data[0].success == 1 ){
-                    swal( 'Listo', response.data[0].msg, 'success' );
-                    $scope.init();
-                }else{
-                    swal( 'Alto', response.data[0].msg, 'error' ); 
-                };
+            function () {
+                gesTemaFactory.deleteTema(parseInt(tema.idTema)).then(function (response) {
+                    console.log('res', response);
+                    if (response.data[0].success == 1) {
+                        swal('Listo', response.data[0].msg, 'success');
+                        $scope.init();
+                    } else {
+                        swal('Alto', response.data[0].msg, 'error');
+                    };
+                });
             });
-        });
     };
 
-    $scope.editarTema = function(tema){
+    $scope.editarTema = function (tema) {
         $scope.idTema = tema.idTema;
         $scope.frmTemaEdit = {
             cat_nombre: tema.tema,
@@ -92,7 +107,7 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
         $("#modalEditarTem").modal("show");
     };
 
-    $scope.saveEditarTem = function(){
+    $scope.saveEditarTem = function () {
         swal({
             title: 'Merídio',
             text: "¿Está seguro de editar este tema?",
@@ -102,17 +117,17 @@ app.controller("gesTemaCtrl", ["$scope", "$sce", "$location","filterFilter","ges
             confirmButtonText: 'Si',
             closeOnConfirm: false
         },
-        function(){
-            gesTemaFactory.editarTema($scope.frmTemaEdit.cat_nombre, $scope.idTema).then(function(response){
-                if( response.data[0].success == 1 ){
-                    swal( 'Listo', response.data[0].msg, 'success' );
-                    $scope.init();
-                    $("#modalEditarTem").modal("hide");
-                }else{
-                    swal( 'Alto', response.data[0].msg, 'error' ); 
-                }
+            function () {
+                gesTemaFactory.editarTema($scope.frmTemaEdit.cat_nombre, $scope.idTema).then(function (response) {
+                    if (response.data[0].success == 1) {
+                        swal('Listo', response.data[0].msg, 'success');
+                        $scope.init();
+                        $("#modalEditarTem").modal("hide");
+                    } else {
+                        swal('Alto', response.data[0].msg, 'error');
+                    }
+                });
             });
-        });
     };
-	
+
 }]);

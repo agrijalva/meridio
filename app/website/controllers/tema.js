@@ -38,7 +38,9 @@ Tema.prototype.get_temaByIdMat = function (req, res, next) {
 Tema.prototype.get_getTemas = function (req, res, next) {
     var self = this;
     
-    var params = [];
+    var params = [
+        { name: 'idMateria', value: req.query.idMateria, type: self.model.types.STRING },
+    ];
     this.model.query('TEM_TODOS_SP', params, function (error, result) {
         
         self.view.expositor(res, {
