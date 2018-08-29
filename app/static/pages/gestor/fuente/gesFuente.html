@@ -1,5 +1,105 @@
-<div ng-init="">
+<div ng-init="init()">
     <div class=container>
-    	<h1>Fuente</h1>
+        <div class="pnl-perfil">
+            <div class="col-sm-12">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div ng-show="contentLinks != 0" class="panel panel-default pnl-enlaces">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Fuente</h3>
+                            <button class="btn btn-default pull-right" style="margin-top: -30px;" ng-click="nuevaFuente();">
+                                <i class="fa fa-plus"></i> Nueva Fuente
+                            </button>
+                        </div>
+                        <!-- Inicio del repeat -->
+                        <div>
+                            <div class="panel-body">
+                                <table width="100%" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="30"> <strong> # </strong></th>
+                                            <th> <strong> Fuente </strong></th>
+                                            <th width="150"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="fun in fuente">
+                                        <td>
+                                            <span style="font-size:15px;"> {{$index + 1}} </span>
+                                        </td>
+                                        <td>
+                                            <span style="font-size:15px;">{{fun.fuente}}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-xs" ng-click="editarFuente(fun);">Editar</button>
+                                            <button class="btn btn-danger btn-xs" ng-click="deleteFuente(fun);">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Fin del repeat -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Insert -->
+<div class="modal fade" id="modalNuevoFue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="guardarFuente();" name="frmFuente" id="frmFuente">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nueva Fuente</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre de Fuente <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmFuente.cat_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Guardar Fuente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarFue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="saveEditarFue();" name="frmFuenteEdit" id="frmFuenteEdit">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar Fuente</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmFuenteEdit.cat_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Editar Fuente</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
