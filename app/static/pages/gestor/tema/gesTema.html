@@ -10,8 +10,25 @@
                                 <i class="fa fa-plus"></i> Nuevo Tema
                             </button>
                         </div>
-                        <!-- Inicio del repeat -->
+                        <br>
                         <div>
+                            <label>Seleccione una materia.</label>
+                            <select class="form-control" ng-model="frmTema.idMateria" ng-change="getTemaById(frmTema.idMateria)">
+                                <option value="0" selected="">Seleccione</option>
+                                <option ng-repeat="(key, mat) in materias" value="{{mat.idMateria}}">{{ mat.materia }}</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div ng-show="!content">
+                            <div class="panel-body text-center">
+                                <br><br>
+                                <i class="fa fa-inbox" aria-hidden="true" style="font-size: 120px; color: #AAA;"></i>
+                                <br>
+                                <span style="font-size: 20px; color: #AAA;">Seleccione una materia.</span>
+                            </div>
+                        </div>
+                        <!-- Inicio del repeat -->
+                        <div ng-show="content">
                             <div class="panel-body">
                                 <table width="100%" border="0">
                                     <thead>
@@ -23,10 +40,10 @@
                                     </thead>
                                     <tr ng-repeat="tema in temas">
                                         <td>
-                                            <span  style="font-size:15px;"> {{$index + 1}} </span>
+                                            <span style="font-size:15px;"> {{$index + 1}} </span>
                                         </td>
                                         <td>
-                                            <span  style="font-size:15px;">{{tema.tema}}</span>
+                                            <span style="font-size:15px;">{{tema.tema}}</span>
                                         </td>
                                         <td>
                                             <button class="btn btn-success btn-xs" ng-click="editarTema(tema);">Editar</button>
@@ -56,6 +73,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
+                            <label><small>Materia <small><i class="fa fa-asterisk text-danger"></i></small></small></label>
+                            <select class="form-control" ng-model="frmTema.idMateria">
+                                <option value="0" selected="">Seleccione</option>
+                                <option ng-repeat="(key, mat) in materias" value="{{mat.idMateria}}">{{ mat.materia }}</option>
+                            </select>
                             <label>
                                 <small>Nombre de tema <small><i class="fa fa-asterisk text-danger"></i></small></small>
                             </label>

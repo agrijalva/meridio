@@ -35,5 +35,49 @@ Idioma.prototype.get_idiomas = function(req, res, next) {
     });
 };
 
+Idioma.prototype.get_insertIdioma = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },
+        { name: 'idioma', value: req.query.idioma, type: self.model.types.STRING },
+        { name: 'estatus', value: 1, type: self.model.types.INT }
+    ];
+
+    this.model.query('IDI_INSERT_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Idioma.prototype.get_deleteIdioma = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idIdioma', value: req.query.idIdioma, type: self.model.types.INT }
+    ];
+
+    this.model.query('IDI_DELETE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Idioma.prototype.get_editIdioma = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idIdioma', value: req.query.idIdioma, type: self.model.types.INT },
+        { name: 'idioma', value: req.query.idioma, type: self.model.types.STRING }
+    ];
+
+    this.model.query('IDI_UPDATE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
 
 module.exports = Idioma;

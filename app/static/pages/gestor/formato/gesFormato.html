@@ -1,5 +1,105 @@
-<div ng-init="">
+<div ng-init="init()">
     <div class=container>
-    	<h1>Formato</h1>
+        <div class="pnl-perfil">
+            <div class="col-sm-12">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div ng-show="contentLinks != 0" class="panel panel-default pnl-enlaces">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Formato</h3>
+                            <button class="btn btn-default pull-right" style="margin-top: -30px;" ng-click="nuevoFormato();">
+                                <i class="fa fa-plus"></i> Nueva Formato
+                            </button>
+                        </div>
+                        <!-- Inicio del repeat -->
+                        <div>
+                            <div class="panel-body">
+                                <table width="100%" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="30"> <strong> # </strong></th>
+                                            <th> <strong> Formato </strong></th>
+                                            <th width="150"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="formato in formatos">
+                                        <td>
+                                            <span style="font-size:15px;"> {{$index + 1}} </span>
+                                        </td>
+                                        <td>
+                                            <span style="font-size:15px;">{{formato.formato}}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-xs" ng-click="editarFormato(formato);">Editar</button>
+                                            <button class="btn btn-danger btn-xs" ng-click="deleteFormato(formato);">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Fin del repeat -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Insert -->
+<div class="modal fade" id="modalNuevoForma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="guardarFormato();" name="frmFormato" id="frmFormato">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nueva Formato</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmFormato.cat_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Guardar Formato</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="saveEditarForm();" name="frmFormatoEdit" id="frmFormatoEdit">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar Formato</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small>Nombre <small><i class="fa fa-asterisk text-danger"></i></small></small>
+                            </label>
+                            <input name="cat_nombre" type="text" class="form-control" ng-model="frmFormatoEdit.cat_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="alert alert-info pull-left">Los campos con asterisco (<small><i class="fa fa-asterisk text-danger"></i></small>)
+                        son obligatorios</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Editar Formato</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

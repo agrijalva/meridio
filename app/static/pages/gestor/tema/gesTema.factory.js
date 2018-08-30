@@ -15,21 +15,25 @@ app.factory( 'gesTemaFactory', function( $http ){
                 }
             });
         },
-        getTemas: function() {
+        getTemas: function(idMateria) {
             return $http({
                 url: Path_Temas + 'getTemas/',
                 method: "GET",
+                params: {
+                    idMateria: idMateria
+                },
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
         },
-        nuevoTema: function(tema,idUsuario) {
+        nuevoTema: function(tema,idMateria,idUsuario) {
             return $http({
                 url: Path_Temas + 'nuevoTema/',
                 method: "GET",
                 params: {
                     tema: tema,
+                    idMateria: idMateria,
                     idUsuario: idUsuario
                 },
                 headers: {

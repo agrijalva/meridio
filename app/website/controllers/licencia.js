@@ -19,7 +19,6 @@ var Licencia = function (conf) {
     };
 };
 
-
 Licencia.prototype.get_licencia = function(req, res, next) {
     var self = this;
     var params = [];
@@ -32,5 +31,51 @@ Licencia.prototype.get_licencia = function(req, res, next) {
     });
 };
 
+Licencia.prototype.get_insertLicencia = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'licencia', value: req.query.licencia, type: self.model.types.STRING },
+        { name: 'descripcion', value: req.query.descripcion, type: self.model.types.STRING },
+        { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },
+        { name: 'estatus', value: 1, type: self.model.types.INT }
+    ];
+
+    this.model.query('LIC_INSERT_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Licencia.prototype.get_deleteLicencia = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idLicencia', value: req.query.idLicencia, type: self.model.types.INT }
+    ];
+
+    this.model.query('LIC_DELETE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Licencia.prototype.get_editLicencia = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idLicencia', value: req.query.idLicencia, type: self.model.types.INT },
+        { name: 'licencia', value: req.query.licencia, type: self.model.types.STRING },
+        { name: 'descripcion', value: req.query.descripcion, type: self.model.types.STRING },
+    ];
+
+    this.model.query('LIC_UPDATE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
 
 module.exports = Licencia;

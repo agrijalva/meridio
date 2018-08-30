@@ -63,7 +63,7 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
                 } else {
                     var img = $scope.reader.result.split(",");
                     var sendData = {
-                        usuario: 1,
+                        usuario: $scope.idUsuario,
                         nombre: $scope.frmCategoria.cat_nombre,
                         order: $scope.frmCategoria.cat_orden,
                         imagen: img[1],
@@ -129,7 +129,7 @@ app.controller("gesCategoriaCtrl", ["$scope", "$sce", "$location", "filterFilter
         function () {
             var img = $scope.reader.result.split(",");
             var sendData = {
-                usuario: 1,
+                usuario: $scope.idUsuario,
                 nombre: $scope.frmCategoriaEdit.cat_nombre,
                 order: $scope.frmCategoriaEdit.cat_orden,
                 imagen: img[1],

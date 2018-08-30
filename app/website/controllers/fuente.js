@@ -32,5 +32,49 @@ Fuente.prototype.get_fuente = function(req, res, next) {
     });
 };
 
+Fuente.prototype.get_insertFuente = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'fuente', value: req.query.fuente, type: self.model.types.STRING },
+        { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },
+        { name: 'estatus', value: 1, type: self.model.types.INT }
+    ];
+
+    this.model.query('FUE_INSERT_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Fuente.prototype.get_deleteFuente = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'idFuente', value: req.query.idFuente, type: self.model.types.INT }
+    ];
+
+    this.model.query('FUE_DELETE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Fuente.prototype.get_editFuente = function(req, res, next) {
+    var self = this;
+    var params = [
+        { name: 'fuente', value: req.query.fuente, type: self.model.types.STRING },
+        { name: 'idFuente', value: req.query.idFuente, type: self.model.types.INT }
+    ];
+
+    this.model.query('FUE_UPDATE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
 
 module.exports = Fuente;
