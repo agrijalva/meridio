@@ -56,8 +56,8 @@ Login.prototype.get_loginLdap = function(req, res, next) {
     // }));
 
 
-    var config = { url: 'ldap://10.97.26.5:636',
-                   baseDN: 'dc=TEC,dc=com',
+    var config = { url: 'ldap://prod406ad01.svcs.itesm.mx',
+                   baseDN: 'ou=CEM,dc=svcs,dc=itesm,dc=mx',
                    username: 'L00576843@TEC',
                    password: 'VEmema30!' }
     // var ad = new ActiveDirectory(config);
