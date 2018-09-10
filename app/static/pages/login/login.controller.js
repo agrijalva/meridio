@@ -14,7 +14,9 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
     	}
     	else{
 	    	loginFactory.login( $scope.user, $scope.pass ) .then(function(result){
-                var res = result.data;
+                console.log( "result", result );
+
+                var res = result.data[0];
                 if( res[0].success != 0 ){
                     $location.path("/enlaces/home");
                     localStorage.setItem("RCVUserData", JSON.stringify(res[0]));

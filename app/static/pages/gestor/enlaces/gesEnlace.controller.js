@@ -1,6 +1,8 @@
 app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","gesEnlaceFactory", "noticiaFactory", function($scope, $sce, $location, filterFilter, gesEnlaceFactory, noticiaFactory ) {
     $scope.DataUser = JSON.parse( localStorage.getItem("RCVUserData") );
+    // $scope.DataUser = $scope.DataUser[0];
     $scope.idUsuario = parseInt($scope.DataUser.idUsuario);
+
 
     $scope.datosEnlace = {
         idUsuario: 1,

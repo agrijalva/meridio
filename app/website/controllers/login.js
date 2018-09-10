@@ -31,10 +31,47 @@ Login.prototype.get_login = function(req, res, next) {
     ];
     
     this.model.query('USU_LOGIN_SP', params, function(error, result) {
-        self.view.expositor(res, {
-            error: error,
-            result: result
+        var ldap    = result[0].ldap;
+        var baseDN  = result[0].baseDN;
+
+        // Validacion de LDAP
+        // var config = { url: 'ldap://prod406ad01.svcs.itesm.mx',
+        //                baseDN: 'ou=CEM,dc=svcs,dc=itesm,dc=mx', }
+
+        var config = { url: ldap, baseDN: baseDN }
+
+        var ad = new ActiveDirectory(config);
+        var username = req.query.usuario;
+        var password = req.query.pass;
+         
+        ad.authenticate(username, password, function(err, auth) {
+            auth = true;
+            if (auth) {
+                var paramsControl = [
+                    { name: 'almacenado', value: result[0].almacenado, type: self.model.types.INT },
+                    { name: 'usuario', value: req.query.usuario, type: self.model.types.STRING },
+                    { name: 'pass', value: req.query.pass, type: self.model.types.STRING },
+                    { name: 'tipoUsuario', value: result[0].tipoUsuario, type: self.model.types.INT },
+                    { name: 'administrador', value: result[0].administrador, type: self.model.types.INT }
+                ];
+
+                console.log( paramsControl );
+
+                self.model.queryAllRecordSet('USU_CONTROL_SP', paramsControl, function(error, result) {
+                    self.view.expositor(res, {
+                        error: error,
+                        result: result
+                    });
+                });
+            }
+            else {
+                self.view.expositor(res, {
+                    error: error,
+                    result: [{ success: 0, msg: 'No se logro autenticarse, intente más tarde.' }]
+                });
+            }
         });
+        // / Validacion de LDAP
     });
 };
 
@@ -47,43 +84,33 @@ Login.prototype.get_loginLdap = function(req, res, next) {
         { name: 'pass', value: req.query.pass, type: self.model.types.STRING }
     ];
     
-    // var LdapStrategy = require('passport-ldapauth');
- 
-    // passport.use(new LdapStrategy({
-    //     server: {
-    //       url: 'ldap://10.97.26.5:636'
-    //     }
-    // }));
-
-
-    var config = { url: 'ldap://prod406ad01.svcs.itesm.mx',
-                   baseDN: 'ou=CEM,dc=svcs,dc=itesm,dc=mx',
-                   username: 'L00576843@TEC',
-                   password: 'VEmema30!' }
-    // var ad = new ActiveDirectory(config);
-    // console.log( ad );
-
-
-
-    var ad = new ActiveDirectory(config);
-    var username = 'L00576843@TEC';
-    var password = 'VEmema30!';
-     
-    ad.authenticate(username, password, function(err, auth) {
-      if (err) {
-        console.log('ERROR: '+JSON.stringify(err));
-        return;
-      }
-      
-      if (auth) {
-        console.log('Authenticated!');
-      }
-      else {
-        console.log('Authentication failed!');
-      }
-    });
-
     this.model.query('USU_LOGIN_SP', params, function(error, result) {
+        console.log( result );
+        
+        // var config = { url: 'ldap://prod406ad01.svcs.itesm.mx',
+        //                baseDN: 'ou=CEM,dc=svcs,dc=itesm,dc=mx', }
+
+        // var ad = new ActiveDirectory(config);
+        // var username = req.query.usuario; //'novusmeridio';
+        // var password = req.query.pass; //'NOvu5.M3r1di0';
+         
+        // ad.authenticate(username, password, function(err, auth) {
+        //     if (err) {
+        //         console.log('ERROR: '+JSON.stringify(err));
+        //         return;
+        //     }
+
+        //     console.log("auth", auth);
+
+        //     if (auth) {
+        //         console.log('Authenticated!');
+        //         // Aqui va el success correcto.
+        //     }
+        //     else {
+        //         console.log('Authentication failed!');
+        //     }
+        // });
+
         self.view.expositor(res, {
             error: error,
             result: result
@@ -120,3 +147,8 @@ Login.prototype.get_empleado = function(req, res, next) {
 };
 
 module.exports = Login;
+
+
+// http://prenovus.cem.itesm.mx:1100/api/login/loginLdap/?pass=MA1307en#&usuario=A01747832
+// http://prenovus.cem.itesm.mx:1100/api/login/loginLdap/?pass=5h7o-Ru4&usuario=A0010
+// http://prenovus.cem.itesm.mx:1100/api/login/loginLdap/?pass=7o5h-4uR&usuario=L0010
