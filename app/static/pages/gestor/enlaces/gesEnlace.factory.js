@@ -1,4 +1,4 @@
-var Path_Favorito      = API_Path + '/enlaces/';
+var gesEnlace      = API_Path + '/enlaces/';
 
 app.factory( 'gesEnlaceFactory', function( $http ){
 	return {
@@ -8,6 +8,18 @@ app.factory( 'gesEnlaceFactory', function( $http ){
                 method: "GET",
                 params: {
                     idUsuario: idUsuario
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        eliminar: function( idEnlace ) {
+            return $http({
+                url: gesEnlace + 'eliminar/',
+                method: "GET",
+                params: {
+                    idEnlace: idEnlace
                 },
                 headers: {
                     'Content-Type': 'application/json'

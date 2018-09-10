@@ -104,7 +104,6 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
     }
 
     $scope.guardarEnlace = function(){
-        
         if($scope.datosEnlace.titulo ==  ''){
             swal("Merídio", "Falta especificar el campo: titulo");
         }
@@ -151,6 +150,28 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
                     swal("Merídio", "Se guardo el nuevo enlace");   
             });
         }
-    
-    }	
+    }
+
+    $scope.eliminarEnlace = function( idEnlace ){
+        swal({
+            title: 'Merídio',
+            text: "¿Está seguro de eliminar este enlace?",
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Si',
+            closeOnConfirm: false
+        },
+        function(){
+            gesEnlaceFactory.eliminar(idEnlace).then(function(response){
+                if( response.data[0].success == 1 ){
+                    swal("Merídio", response.data[0].msg, 'success'); 
+                    $(".enl-" + idEnlace).remove();
+                    $('#modalNuevoIdioma').modal('hide');
+                }else{
+                    swal( 'Alto', response.data[0].msg, 'error' );
+                }
+            });
+        });
+    }
 }]);

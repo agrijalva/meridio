@@ -12,7 +12,7 @@
                         </div>
 
                         <div>
-                            <div class="panel-body" ng-repeat="enlace in Enlaces | startFrom:currentPage*pageSize | limitTo:pageSize"" >
+                            <div class="panel-body enl-{{enlace.idEnlace}}" ng-repeat="enlace in Enlaces | startFrom:currentPage*pageSize | limitTo:pageSize" >
                                 <div class="col-sm-12 pnl-titulo">
                                     <div> <img src="https://www.google.com/s2/favicons?domain={{enlace.fuente}}" width="12"> <small>{{enlace.fuente}}</small></div>
                                     <a href="{{enlace.URL}}" target="_blank">
@@ -36,7 +36,7 @@
                                             <td>
                                                 <br>
                                                 <button class="btn btn-success btn-xs" disabled="">Editar</button>
-                                                <button class="btn btn-danger btn-xs" disabled="">Eliminar</button>
+                                                <button class="btn btn-danger btn-xs" ng-click="eliminarEnlace( enlace.idEnlace );">Eliminar</button>
                                             </td>
                                             <td align="right" ng-show="enlace.estatus == 0">
                                                 <br>

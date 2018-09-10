@@ -46,6 +46,20 @@ Enlaces.prototype.get_getById = function(req, res, next) {
     });
 };
 
+Enlaces.prototype.get_eliminar = function(req, res, next) {
+    var self = this;
+    var params = [{ name: 'idEnlace', value: req.query.idEnlace, type: self.model.types.INT } ];
+
+    console.log(params);
+
+    this.model.query('ENL_DELETE_SP', params, function(error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
 Enlaces.prototype.get_aprobarEnlace = function(req, res, next) {
     var self = this;
     var params = [  
