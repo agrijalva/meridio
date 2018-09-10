@@ -55,12 +55,10 @@ Login.prototype.get_login = function(req, res, next) {
                     { name: 'administrador', value: result[0].administrador, type: self.model.types.INT }
                 ];
 
-                console.log( paramsControl );
-
-                self.model.queryAllRecordSet('USU_CONTROL_SP', paramsControl, function(error, result) {
+                self.model.queryAllRecordSet('USU_CONTROL_SP', paramsControl, function(error, result2) {
                     self.view.expositor(res, {
                         error: error,
-                        result: result
+                        result: result2
                     });
                 });
             }

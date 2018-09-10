@@ -205,6 +205,17 @@ app.factory( 'noticiaFactory', function( $http ){
             });
         },
 
+        actualizaEnlace: function( parametros ) {
+            return $http({
+                url: Path_Enlaces + 'actualizaEnlace/',
+                method: "GET",
+                params: parametros,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+
         guardaNoticia: function( contenido ) {
             var form = document.forms.namedItem("frmNoticia");
             var oData = new FormData(form);

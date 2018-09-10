@@ -5,7 +5,7 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
 
 
     $scope.datosEnlace = {
-        idUsuario: 1,
+        idUsuario: $scope.idUsuario,
         titulo: '',
         descripcion: '',
         link: '',
@@ -173,5 +173,86 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
                 }
             });
         });
+    }
+
+    $scope.openModalEditar = function( enlace ){
+        enlace.idTema = parseInt(enlace.idTema);
+        console.log( "enlace", enlace );
+        $("#modalEditarEnlace").modal('show');
+
+        noticiaFactory.temaByIdMat( enlace.idMateria ).then(function(response){
+            $scope.temas = response.data;
+            // if( $scope.temas.length == 0 )
+            $scope.datosEnlace = {
+                idEnlace:       enlace.idEnlace,
+                idUsuario:      $scope.idUsuario,
+                titulo:         enlace.titulo,
+                descripcion:    enlace.descripcion,
+                link:           enlace.URL,
+                idCategoria:    enlace.idCategoria,
+                idTema:         enlace.idTema,
+                idMateria:      enlace.idMateria,
+                idIdioma:       enlace.idIdioma,
+                idFuente:       enlace.idFuente,
+                idLicencia:     enlace.idLicencia,
+                idFormato:      enlace.idFormato,
+                autor:          enlace.autor,
+                clave:          enlace.keywords
+            }
+
+            console.log( "datosEnlace", $scope.datosEnlace );
+
+            setTimeout( function(){
+                $scope.datosEnlace.idTema = enlace.idTema;
+            }, 500);
+        });
+    }
+
+    $scope.actualizarEnlace = function( idEnlace ){
+        if($scope.datosEnlace.titulo ==  ''){
+            swal("Merídio", "Falta especificar el campo: titulo");
+        }
+        else if($scope.datosEnlace.descripcion ==  ''){
+            swal("Merídio", "Falta especificar el campo: descripcion");
+        }
+        else if($scope.datosEnlace.link ==  ''){
+            swal("Merídio", "Falta especificar el campo: link");
+        }
+        else if($scope.datosEnlace.idCategoria ==  0){
+            swal("Merídio", "Falta especificar el campo: categoria");
+        }
+        else if($scope.datosEnlace.idTema ==  0){
+            swal("Merídio", "Falta especificar el campo: tema");
+        }
+        else if($scope.datosEnlace.idIdioma ==  0){
+            swal("Merídio", "Falta especificar el campo: idioma");
+        }
+        else if($scope.datosEnlace.idFuente ==  0){
+            swal("Merídio", "Falta especificar el campo: fuente");
+        }
+        else if($scope.datosEnlace.idLicencia ==  0){
+            swal("Merídio", "Falta especificar el campo: licencia");
+        }
+        else if($scope.datosEnlace.idFormato ==  0){
+            swal("Merídio", "Falta especificar el campo: formato");
+        }
+        else{
+            console.log( "Validación", $scope.datosEnlace );
+            noticiaFactory.actualizaEnlace( $scope.datosEnlace ).then(function(response){
+                $scope.resultado = response.data;
+                if( $scope.resultado.length == 0 ){
+                    swal("Merídio", "Ocurrio un problema al guardar el enlace"); 
+                }
+                else{
+                    $("#modalNuevaNoticia").modal("hide");
+                    noticiaFactory.enlacesTodas( $scope.idUsuario ).then(function(response){
+                        $scope.Enlaces = response.data;
+                    });
+                    swal("Merídio", "Se guardo el nuevo enlace");   
+                }
+
+                $("#modalEditarEnlace").modal('hide');
+            });
+        }
     }
 }]);
