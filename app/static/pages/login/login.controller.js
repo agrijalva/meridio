@@ -17,11 +17,11 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
                 console.log( "result", result );
 
                 var res = result.data[0];
-                if( res[0].success != 0 ){
+                if( res.success != 0 ){
                     $location.path("/enlaces/home");
-                    localStorage.setItem("RCVUserData", JSON.stringify(res[0]));
+                    localStorage.setItem("RCVUserData", JSON.stringify(res));
                 }else{
-                    swal("Merídio", res[0].msg );
+                    swal("Merídio", res.msg );
                 };
 	        }, function(error){
 	            console.log("Error", error);

@@ -58,7 +58,7 @@ Login.prototype.get_login = function(req, res, next) {
                 self.model.queryAllRecordSet('USU_CONTROL_SP', paramsControl, function(error, result2) {
                     self.view.expositor(res, {
                         error: error,
-                        result: result2
+                        result: result2[0]
                     });
                 });
             }
