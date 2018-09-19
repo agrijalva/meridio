@@ -37,8 +37,8 @@
                                             <label>{{cat.orden}}</label>
                                         </td>
                                         <td>
-                                            <button class="btn btn-success btn-xs" ng-click="editarCategoria(cat);">Editar</button>
-                                            <button class="btn btn-danger btn-xs" ng-click="deleteCategoria(cat);">Eliminar</button>
+                                            <button ng-show="DataUser.idPerfil == 1" class="btn btn-success btn-xs" ng-click="editarCategoria(cat);">Editar</button>
+                                            <button ng-show="DataUser.idPerfil == 1" class="btn btn-danger btn-xs" ng-click="deleteCategoria(cat);">Eliminar</button>
                                         </td>
                                     </tr>
                                 </table>

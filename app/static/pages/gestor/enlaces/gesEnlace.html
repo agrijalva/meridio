@@ -35,8 +35,8 @@
                                             <td>&nbsp;</td>
                                             <td>
                                                 <br>
-                                                <button ng-show="enlace.owner == 1" class="btn btn-success btn-xs" ng-click="openModalEditar( enlace )">Editar</button>
-                                                <button ng-show="enlace.owner == 1" class="btn btn-danger btn-xs" ng-click="eliminarEnlace( enlace.idEnlace );">Eliminar</button>
+                                                <button ng-show="DataUser.idPerfil == 1 || enlace.owner == 1" class="btn btn-success btn-xs" ng-click="openModalEditar( enlace )">Editar</button>
+                                                <button ng-show="DataUser.idPerfil == 1 || enlace.owner == 1" class="btn btn-danger btn-xs" ng-click="eliminarEnlace( enlace.idEnlace );">Eliminar</button>
                                             </td>
                                             <td align="right" ng-show="enlace.estatus == 0">
                                                 <br>

@@ -29,8 +29,8 @@
                                             <span  style="font-size:15px;">{{materia.materia}}</span>
                                         </td>
                                         <td>
-                                            <button class="btn btn-success btn-xs" ng-click="editarMateria(materia);">Editar</button>
-                                            <button class="btn btn-danger btn-xs" ng-click="deleteMateria(materia);">Eliminar</button>
+                                            <button ng-show="DataUser.idPerfil == 1" class="btn btn-success btn-xs" ng-click="editarMateria(materia);">Editar</button>
+                                            <button ng-show="DataUser.idPerfil == 1" class="btn btn-danger btn-xs" ng-click="deleteMateria(materia);">Eliminar</button>
                                         </td>
                                     </tr>
                                 </table>

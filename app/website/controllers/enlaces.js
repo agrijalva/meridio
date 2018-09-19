@@ -94,7 +94,7 @@ Enlaces.prototype.get_busquedaEnlaces = function(req, res, next) {
     });
 };
 
-Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {actualizaEnlace
+Enlaces.prototype.get_nuevoEnlace = function(req, res, next) {
     var self = this;
     var params = [
         { name: 'idUsuario', value: req.query.idUsuario, type: self.model.types.INT },

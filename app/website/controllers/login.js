@@ -33,15 +33,12 @@ Login.prototype.get_login = function(req, res, next) {
     this.model.query('USU_LOGIN_SP', params, function(error, result) {
         var ldap    = result[0].ldap;
         var baseDN  = result[0].baseDN;
-
-        // Validacion de LDAP
-        // var config = { url: 'ldap://prod406ad01.svcs.itesm.mx',
-        //                baseDN: 'ou=CEM,dc=svcs,dc=itesm,dc=mx', }
+        var dominio = result[0].dominio;
 
         var config = { url: ldap, baseDN: baseDN }
 
         var ad = new ActiveDirectory(config);
-        var username = req.query.usuario;
+        var username = dominio + req.query.usuario;
         var password = req.query.pass;
          
         ad.authenticate(username, password, function(err, auth) {
@@ -73,48 +70,6 @@ Login.prototype.get_login = function(req, res, next) {
     });
 };
 
-Login.prototype.get_loginLdap = function(req, res, next) {
-
-    var self = this;
-
-    var params = [
-        { name: 'usuario', value: req.query.usuario, type: self.model.types.STRING },
-        { name: 'pass', value: req.query.pass, type: self.model.types.STRING }
-    ];
-    
-    this.model.query('USU_LOGIN_SP', params, function(error, result) {
-        console.log( result );
-        
-        // var config = { url: 'ldap://prod406ad01.svcs.itesm.mx',
-        //                baseDN: 'ou=CEM,dc=svcs,dc=itesm,dc=mx', }
-
-        // var ad = new ActiveDirectory(config);
-        // var username = req.query.usuario; //'novusmeridio';
-        // var password = req.query.pass; //'NOvu5.M3r1di0';
-         
-        // ad.authenticate(username, password, function(err, auth) {
-        //     if (err) {
-        //         console.log('ERROR: '+JSON.stringify(err));
-        //         return;
-        //     }
-
-        //     console.log("auth", auth);
-
-        //     if (auth) {
-        //         console.log('Authenticated!');
-        //         // Aqui va el success correcto.
-        //     }
-        //     else {
-        //         console.log('Authentication failed!');
-        //     }
-        // });
-
-        self.view.expositor(res, {
-            error: error,
-            result: result
-        });
-    });
-};
 
 Login.prototype.get_permisos = function(req, res, next) {
 

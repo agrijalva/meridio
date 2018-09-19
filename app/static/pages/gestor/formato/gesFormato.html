@@ -29,8 +29,8 @@
                                             <span style="font-size:15px;">{{formato.formato}}</span>
                                         </td>
                                         <td>
-                                            <button class="btn btn-success btn-xs" ng-click="editarFormato(formato);">Editar</button>
-                                            <button class="btn btn-danger btn-xs" ng-click="deleteFormato(formato);">Eliminar</button>
+                                            <button ng-show="DataUser.idPerfil == 1" class="btn btn-success btn-xs" ng-click="editarFormato(formato);">Editar</button>
+                                            <button ng-show="DataUser.idPerfil == 1" class="btn btn-danger btn-xs" ng-click="deleteFormato(formato);">Eliminar</button>
                                         </td>
                                     </tr>
                                 </table>
