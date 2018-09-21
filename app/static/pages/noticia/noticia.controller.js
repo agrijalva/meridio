@@ -72,7 +72,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
                 $scope.Enlaces = response.data;
             }
             else{
-                swal("Meridio", "No se encontraron resultados");
+                swal("Merídio", "No se encontraron resultados");
             }
             $scope.inCatego = false;
             $(".loading").fadeOut();
@@ -121,12 +121,13 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
 
         if( $scope.filtros == 2 ){
             if( $scope.busquedaGeneral == '' ){
-                swal("Meridio","Debes especificar tus palabras de búsqueda");
+                swal("Merídio","Debes especificar tus palabras de búsqueda");
                 $(".loading").fadeOut();
                 return false;
             }
-            $scope.busqueda.titulo = $scope.busquedaGeneral;
+            $scope.busqueda.titulo      = $scope.busquedaGeneral;
             $scope.busqueda.descripcion = $scope.busquedaGeneral;
+            $scope.busqueda.clave       = $scope.busquedaGeneral;
             $scope.busqueda.idCategoria = $scope.idCategoria;
         }
 
@@ -136,7 +137,7 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
                 $scope.Enlaces = response.data;
             }
             else{
-                swal("Meridio", "No se encontraron resultados");
+                swal("Merídio", "No se encontraron resultados");
             }
             $scope.inCatego = false;
             $(".loading").fadeOut();
@@ -161,8 +162,10 @@ app.controller("NoticiaCtrl", ["$scope", "$sce", "$location","filterFilter","not
         if( op == 1 ){
             $(".more-filter").hide();
             $(".filters").show();
+            $(".pnl-search").hide();
         }
         else{
+            $(".pnl-search").show();
             $(".more-filter").show();
             $(".filters").hide();
         }

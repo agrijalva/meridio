@@ -132,10 +132,10 @@ app.controller("gesEnlaceCtrl", ["$scope", "$sce", "$location","filterFilter","g
             swal("Merídio", "Falta especificar el campo: formato");
         }
         // else if($scope.datosEnlace.autor ==  ''){
-        //     swal("Meridio", "Falta especificar el campo: autor");
+        //     swal("Merídio", "Falta especificar el campo: autor");
         // }
         // else if($scope.datosEnlace.clave ==  ''){
-        //     swal("Meridio", "Falta especificar el campo: clave");
+        //     swal("Merídio", "Falta especificar el campo: clave");
         // }
         else{
             noticiaFactory.nuevoEnlace( $scope.datosEnlace ).then(function(response){

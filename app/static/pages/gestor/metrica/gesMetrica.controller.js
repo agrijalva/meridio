@@ -12,7 +12,7 @@ app.controller("gesMetricaCtrl", ["$scope", "$sce", "$location", "filterFilter",
 
 	$scope.generarResumen = function(){
         if( $scope.ctrl.myDate1 == '' && $scope.ctrl.myDate2 == '' ){
-            swal("Meridio","No se ha seleccionado un periodo.");
+            swal("Merídio","No se ha seleccionado un periodo.");
             $scope.showEstadisticas = false;
         }
         else{
@@ -28,7 +28,7 @@ app.controller("gesMetricaCtrl", ["$scope", "$sce", "$location", "filterFilter",
             }
 
             if( f1 > f2 ){
-            	swal("Meridio","La fecha de inicio no debe ser mayor a la fecha final del periodo.");
+            	swal("Merídio","La fecha de inicio no debe ser mayor a la fecha final del periodo.");
 				$scope.showEstadisticas = false;            	
             	return false;
             }
