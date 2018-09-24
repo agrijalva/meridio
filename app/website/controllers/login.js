@@ -42,7 +42,7 @@ Login.prototype.get_login = function(req, res, next) {
         var password = req.query.pass;
          
         ad.authenticate(username, password, function(err, auth) {
-            auth = true;
+            // auth = true;
             if (auth) {
                 var paramsControl = [
                     { name: 'almacenado', value: result[0].almacenado, type: self.model.types.INT },
