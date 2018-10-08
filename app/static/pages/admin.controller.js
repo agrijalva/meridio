@@ -3,6 +3,11 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
         $scope.DataUser     = JSON.parse( localStorage.getItem("RCVUserData") );
         $scope.currentUser  = $scope.DataUser.usu_nombre;
         $scope.idCatalogoUsuario = $scope.DataUser.idCatalogoUsuario;
+        $scope.btnDescargar = true;
+
+        if( $location.path() == '/enlaces/descargar'){
+            $scope.btnDescargar = false;
+        }
     }
     catch( e ){
         $location.path("/login");
@@ -11,6 +16,7 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
     $scope.pnlConocenos = function(){
         $location.path("/enlaces/conocenos");
         $scope.hideMenu();
+        $scope.btnDescargar = true;
     }
 
     $scope.pnlAyuda = function(){
@@ -18,7 +24,14 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
         $scope.hideMenu();
     }
 
+    $scope.descargar = function(){
+        $location.path("/enlaces/descargar");
+        $scope.btnDescargar = false;
+        $scope.hideMenu();
+    }
+
     $scope.pnlNoticias = function(){
+        $scope.btnDescargar = true;
         if( window.location.hash == '#/enlaces/home' ){
             location.reload();            
         }
@@ -29,26 +42,31 @@ app.controller("AdminCtrl", ["$scope", "$location","filterFilter", function($sco
     }
 
     $scope.pnlFavoritos = function(){
+        $scope.btnDescargar = true;
         $location.path("/enlaces/favoritos");
         $scope.hideMenu();
     }
 
     $scope.pnlVer = function(){
+        $scope.btnDescargar = true;
         $location.path("/enlaces/perfil");
         $scope.hideMenu();
     }
 
     $scope.pnlEditar = function(){
+        $scope.btnDescargar = true;
         $location.path("/enlaces/editarperfil");
         $scope.hideMenu();
     }
 
     $scope.pnlCambiar = function(){
+        $scope.btnDescargar = true;
         $location.path("/enlaces/cambiarpassword");
         $scope.hideMenu();
     }
 
     $scope.close = function(){
+        $scope.btnDescargar = true;
     	localStorage.setItem("RCVUserData", "");
         $scope.hideMenu();
     	$location.path("/login");

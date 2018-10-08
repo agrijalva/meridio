@@ -53,6 +53,13 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         templateUrl: "pages/ayuda/templates/ayuda.html"
     })
 
+    .state("descargar", {
+        url: "/descargar",
+        parent: "enlaces",
+        cache:false,
+        templateUrl: "pages/descargar/templates/descargar.html"
+    })
+
     .state("editarperfil", {
         url: "/editarperfil",
         parent: "enlaces",
