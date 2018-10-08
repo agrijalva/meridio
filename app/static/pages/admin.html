@@ -2,20 +2,29 @@
     <div class="header-admin">
         <div class="container">
         	<div class="row">
-	        	<div class="col-sm-6">
+	        	<div class="col-xs-6">
 	        		<div class="header-icons">
 		        		<i class="fa fa-bars burguer-menu" aria-hidden="true" ng-click="showMenu();"></i>
 		        		<img src="images/logo_tec_blanco.png" class="logo-menu" width="120" class="logo">
 		        		<!-- <img src="images/logo_meridio_blanco_hor.png" class="logo-menu" width="200" class="logo"> -->
 	        		</div>
 	        	</div>
-	        	<div class="col-sm-6">
+	        	<div class="col-xs-6" style="">
 	        		<div class="panel-perfil pull-right">
-	        			<button class="btn btn-link bth-header" ng-click="pnlNoticias();"> Inicio </button>
+	        			<ul class="ul-header-menu">
+	        				<li class="hidden-xs"> <button class="btn btn-link bth-header" ng-click="pnlNoticias();"> Inicio </button> </li>
+	        				<li class="hidden-xs"> <button class="btn btn-link bth-header" ng-click="pnlConocenos();"> Conócenos </button> </li>
+	        				<li class="hidden-xs"> <button class="btn btn-link bth-header" ng-click="pnlAyuda();"> Ayuda </button> </li>
+	        				<li class="hidden-xs"> <img src="images/logo_meridio_blanco_hor.png" width="100">  </li>
+	        				<li class="android"> <img src="images/android-black.png" width="110"> </li>
+	        			</ul>
+	        			
 	        			<!-- <a class="btn btn-link bth-header" href="/#/enlaces/home"> Inicio </a> -->
-	        			<button class="btn btn-link bth-header" ng-click="pnlConocenos();"> Conócenos </button>
-	        			<button class="btn btn-link bth-header" ng-click="pnlAyuda();"> Ayuda </button>
-	        			<img src="images/logo_meridio_blanco_hor.png" width="100">
+	        			
+	        		
+	        			
+	        			
+	        			<!--  -->
 	        			<!-- <div class="per-nombre">Alejandro Grijalva Antonio</div> -->
 	        		</div>
 	        	</div>

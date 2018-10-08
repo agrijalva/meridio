@@ -20,7 +20,7 @@
 }
 
 .panel-perfil{
-	width: 350px;
+	/*width: 350px;*/
 	margin-top: 10px;
 	text-align: right;
 }
@@ -427,4 +427,55 @@
 
 .pointer{
 	cursor: pointer;
+}
+
+.ul-header-menu{
+	list-style-type: none;
+	display: inline;
+}
+
+.ul-header-menu li{
+	display: inline;
+}
+
+.android{
+	overflow: hidden !important;
+	width: 300px !important;
+	padding: 0 0 0 30px;
+}
+
+.android img{
+	cursor: pointer;
+}
+
+.android img:hover{
+	opacity: 0.5;
+}
+
+@media only screen and (max-width: 600px)  {
+	.pnl-search-o input{
+		width: 80%;
+	}
+
+	.logo-menu{
+		width: 100px !important;
+	}
+
+	.android{
+		padding: 0;
+	}
+
+	.pnl-square {
+	    position: relative;
+	    left: 0px;
+	    width: 100%;
+	}
+
+	.panel-body{
+		padding: 0;
+	}
+
+	.panel-resultados{
+		padding: 0;
+	}
 }
