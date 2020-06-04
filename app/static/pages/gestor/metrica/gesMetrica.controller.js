@@ -17,10 +17,10 @@ app.controller("gesMetricaCtrl", ["$scope", "$sce", "$location", "filterFilter",
         }
         else{
             var f1 = $scope.ctrl.myDate1;
-            var sf1 = f1.getFullYear() +"-"+( (f1.getMonth() - 1) < 10 ? "0" + ( f1.getMonth() + 1): (f1.getMonth() + 1) ) + "-" + ( f1.getDate() < 10 ? "0" + f1.getDate() : f1.getDate() );
+            var sf1 = f1.getFullYear() +"-"+( (f1.getMonth() + 1) < 10 ? "0" + ( f1.getMonth() + 1): (f1.getMonth() + 1) ) + "-" + ( f1.getDate() < 10 ? "0" + f1.getDate() : f1.getDate() );
 
             var f2 = $scope.ctrl.myDate2;
-            var sf2 = f2.getFullYear() +"-"+( (f2.getMonth() - 1) < 10 ? "0" + ( f2.getMonth() + 1): (f2.getMonth() + 1) ) + "-" + ( f2.getDate() < 10 ? "0" + f2.getDate() : f2.getDate() );
+            var sf2 = f2.getFullYear() +"-"+( (f2.getMonth() + 1) < 10 ? "0" + ( f2.getMonth() + 1): (f2.getMonth() + 1) ) + "-" + ( f2.getDate() < 10 ? "0" + f2.getDate() : f2.getDate() );
 
             $scope.fechas = {
                 fechaInicio: sf1,
